@@ -1,0 +1,27 @@
+<div class="sidenav-container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="sidenav-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+        <i class="material-icons">menu</i>
+    </button>
+    <span> {{ menuActivo.nombre }}</span>
+  </mat-toolbar>
+
+
+  <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [class.sidenav-blanco]="mobileQuery.matches" fixedTopGap="112">
+      <mat-nav-list>
+        <ul>
+          <a *ngFor="let menu of listaMenu" routerLink="./{{menu.ruta}}" routerLinkActive="active" (click)="cambiarMenu(menu.id)">
+            <li>{{menu.nombre}}</li>
+          </a>
+        </ul>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
+</div>

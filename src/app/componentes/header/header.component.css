@@ -1,0 +1,72 @@
+h1{
+    font-size: 1.6em;
+}
+h1 small{
+    font-size: 0.6em;
+}
+.toolbar-header{
+    z-index: 4 !important;
+}
+i.material-icons.icono-cuenta {
+    font-size: 1.7em;
+    line-height: 1.7em;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+i.material-icons.icono-cuenta:hover {
+    color: #fff;
+}
+.barra-institucional{
+    height: 150px;
+    background: #ececec;
+}
+.header-logo{
+    width: 35%;
+    padding-top: 20px;
+    padding-bottom: 16px;
+    padding-left: 35px;
+    float: left;
+    background-color: #ececec;
+}
+.header-logo a img{
+    border: 0;
+    max-width: 100%;
+    vertical-align: middle;
+}
+.font-mid{
+    font-size: 32px;
+}
+.nombre-sitio{
+    width: 35%;
+    text-align: right;
+    margin-right: 35px;
+    padding: 3% 0;
+    float: right;
+    color: #333333;
+}
+.nombre-sitio h1{
+    margin: 1% 0;
+}
+.nombre-sitio h2{
+    margin: 0;
+}
+.container.header {
+    margin: 0 auto 0 !important;
+    padding: 0;
+    z-index: 4;
+}
+@media screen and (max-width: 600px) {
+    .barra-institucional{
+        display: none;
+    }
+    .mat-toolbar.mat-primary{
+        position: fixed;
+        top: 0;
+        z-index: 2;
+    }
+  }
+@media screen and (max-width: 1000px) {
+    .nombre-sitio{
+        padding: 1% 0;
+    }
+  }

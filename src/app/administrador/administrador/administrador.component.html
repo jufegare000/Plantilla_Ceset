@@ -1,0 +1,8 @@
+<div id="container">
+    <h3 *ngIf="nombre_usuario">Hola {{ nombre_usuario }}</h3>
+    <p *ngIf="!nombre_usuario" style="color:red;">Usted no se encuentra autenticado</p>
+    <a routerLink="./grupos" routerLinkActive="active">Grupos</a>
+    <a routerLink="./materias" routerLinkActive="active">Materias</a>
+    <router-outlet></router-outlet>
+</div>
+<!-- #container -->
