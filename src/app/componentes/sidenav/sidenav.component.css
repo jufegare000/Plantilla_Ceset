@@ -1,0 +1,162 @@
+ul{
+    margin: 0;
+  }
+  .mat-sidenav ul{
+    padding: 0;
+  }
+  .sidenav-blanco {
+    background-color: #f3f3f3 !important;
+  }
+  .mat-sidenav li {
+    background-color: #f3f3f3;
+    min-height: 40px;
+    padding: 0 24px;
+    cursor: pointer;
+    box-sizing: border-box;
+    outline: 0;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .mat-sidenav li,.mat-sidenav h4 {
+    color: #2B6447;
+  }
+  .mat-sidenav a {
+    text-decoration: none;
+  }
+  .mat-sidenav a.active {
+    color: #6e9b09;
+  }
+  .sidenav-sidenav-fab-container[_ngcontent-c10] mat-sidenav[_ngcontent-c10]{
+    max-width: 250px !important;
+    min-width: 200px !important;
+    width: 25% !important;
+  }
+  .sidenav-scrolling-content[_ngcontent-c10] {
+    width:100%;
+  }
+  .sidenav-scrolling-content{
+    overflow: auto;
+    padding: 2 5%;
+    width: 100%;
+    background-color: #f3f3f3;
+    box-shadow: none !important;
+  }
+  .mat-sidenav-container{
+    height: 100vh !important;
+  }
+  .sidenav-sidenav-fab-container[_ngcontent-c12] {
+    border-bottom: none !important;
+  }
+  .sidenav-sidenav-fab-container[_ngcontent-c10] mat-sidenav[_ngcontent-c10] {
+  background-color: #f3f3f3;
+  }
+  .mat-sidenav li:hover {
+    background-color: #2d4f37;
+    color: white !important;
+    cursor: pointer;
+  }
+  
+  .sidenav-container {
+    max-width: 940px;
+    width: 94%;
+    margin: 0 auto;
+  }
+  .sidenav-content {
+    padding: 0 2%;
+    margin-top: 40px;
+  }
+  .sidenav-toolbar{
+    background: #f3f3f3;
+  }
+  
+  .is-mobile .sidenav-toolbar {
+    position: relative;
+    top: 56px;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  .is-mobile .mat-sidenav-fixed {
+    background: #f3f3f3;
+  }
+  
+  .app-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  
+  .is-mobile .app-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+  
+    .mat-sidenav a.active li{
+      background-color: #2d4f37 !important;
+      color: #ffffff;
+    }
+    
+    .mat-sidenav-container {
+        background: #fff !important;
+    }
+    .toolbar-formularios{
+      background: #f3f3f3;
+      color: #333;
+      width: 100%;
+    }
+    .mat-sidenav h3, .mat-fab, 
+    .mat-raised-button, 
+    mat-sidenav.mat-sidenav.mat-sidenav-side.mat-sidenav-opened p{
+      color: #333 !important;
+    }
+    .mat-sidenav h3{
+        padding: 0 16px;
+        background: #f3f3f3;
+        margin: 0;
+        min-height: 64px;
+        display: flex;
+        box-sizing: border-box;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        white-space: nowrap;
+    }
+    .mat-sidenav h3{
+      padding: 0 16px;
+    }
+    .sidenav-fab.mat-mini-fab.mat-primary{
+      color: #fff !important;
+    }
+    
+    button.sidenav-fab.mat-mini-fab.mat-accent{
+    color: #6c9a06 !important;
+    background-color: transparent;
+    }
+    .mat-button.mat-primary, .mat-icon-button.mat-primary{
+      color: #6c9a06 !important;
+    }
+    .boton-dependencias{
+      width: 100%;
+    }
+    .flecha-despliegue{
+      margin-top: 3px;
+    }
+    .sidenav-fab.cerrado{
+      width: 100% !important;
+      margin-right: 10px;
+    }
+    @media screen and (max-width: 600px) {
+      .sidenav-container{
+       width: 100%;
+      }
+      .mat-sidenav-fixed {
+        top: 0 !important;
+        max-width: 300px !important;
+        height: 100vh !important;
+    }
+  }

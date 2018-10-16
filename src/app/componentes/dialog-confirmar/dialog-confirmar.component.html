@@ -1,0 +1,14 @@
+<mat-card class="card-dialog">
+  <mat-card-header>
+    <b>{{mensajeConfirmacion}}</b>
+  </mat-card-header>
+
+    <mat-card-content>
+      <div>
+        <button type="submit" mat-raised-button class="btn-guardar" (click)="aceptar()">
+          <i class="material-icons">done</i>&nbsp;Si</button>
+        <button mat-raised-button class="btn-cancelar" mat-dialog-close>
+          <i class="material-icons">clear</i>&nbsp;No</button>
+      </div>
+    </mat-card-content>
+</mat-card>

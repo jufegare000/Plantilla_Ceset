@@ -1,0 +1,14 @@
+h2 {
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
+}
+.btn-guardar{
+    margin: 0 !important;
+    float: left;
+    width: 47%;
+}
+.btn-cancelar{
+    float: right;
+    width: 47%;
+}
