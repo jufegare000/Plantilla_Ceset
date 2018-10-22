@@ -1,0 +1,36 @@
+<div class="container">
+  <mat-form-field>
+    <input matInput [formControl]="name" placeholder="Nombre Completo" required>
+    <!-- <mat-error *ngIf="email.invalid">{{getNameErrorMessage()}}</mat-error> -->
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field hideRequiredMarker>
+    <input matInput [formControl]="email" placeholder="Email" required>
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput [formControl]="password" (blur)="blur = true" placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
+    <mat-icon [color]="color()" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <input matInput [formControl]="id" placeholder="Identificación" required>
+    <!-- <mat-error *ngIf="email.invalid">{{getIdErrorMessage()}}</mat-error> -->
+  </mat-form-field>
+
+  <br>
+  
+
+
+  <br>
+
+  <button mat-raised-button color="primary" [title]="buttonInfo()" [disabled]="!isCompleted()">Registrarse</button>
+</div>

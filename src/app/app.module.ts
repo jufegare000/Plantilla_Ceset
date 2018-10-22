@@ -19,9 +19,14 @@ import {
   MatSnackBarModule,
   MatDialogModule,
   MatProgressBar,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatOptionModule,
+  MatAutocompleteModule,
+  MatNativeDateModule
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard.service';
 import { CifradoService } from './servicios/cifrado.service';
 
@@ -32,7 +37,9 @@ import { JwtService } from './servicios/jwt.service';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { LoginComponent } from './login/login.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { LoginComponent } from './componentes/login/login.component';
+import { RegisterComponent } from './componentes/register/register.component';
 
 
 @NgModule({
@@ -41,15 +48,19 @@ import { LoginComponent } from './login/login.component';
     InicioComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
     AppRoutingModule,
+    MatFormFieldModule,
     MatSidenavModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
     MatDatepickerModule,
     MatCardModule,
@@ -62,7 +73,11 @@ import { LoginComponent } from './login/login.component';
     MatSnackBarModule,
     MatDialogModule,
     MatProgressBarModule,
-    RestangularModule.forRoot( [JwtService], RestangularConfigFactory)
+    RestangularModule.forRoot( [JwtService], RestangularConfigFactory),
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    RecaptchaModule.forRoot()
   ],
   providers: [
     CifradoService,
