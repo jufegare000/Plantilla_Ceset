@@ -24,7 +24,8 @@ import {
   MatIconModule,
   MatOptionModule,
   MatAutocompleteModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -77,6 +78,7 @@ import { RegisterComponent } from './componentes/register/register.component';
     MatNativeDateModule,
     MatAutocompleteModule,
     MatOptionModule,
+    MatCheckboxModule,
     RecaptchaModule.forRoot()
   ],
   providers: [

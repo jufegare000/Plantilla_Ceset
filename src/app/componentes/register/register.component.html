@@ -2,21 +2,39 @@
   <div class="controls-form">
     <input type="hidden" formControlName="$key">
     <mat-form-field>
-      <input matInput formControlName="fullName" placeholder="Nombre Completo">
+      <input matInput formControlName="fullName" placeholder="Nombre Completo" required>
+      <mat-error *ngIf="form.controls['fullName'].hasError('required')">{{getNameErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="email" placeholder="Correo Electronico">
+      <input matInput formControlName="email" placeholder="Correo Electrónico" required>
+      <mat-error *ngIf="form.controls['email'].hasError('required') || form.controls['email'].hasError('email')">{{getEmailErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="pass" placeholder="Contraseña" (blur)="blur = true" [type]="hide ? 'password' : 'text'">
+      <input matInput formControlName="confirmEmail" placeholder="Confirmar Correo Electrónico" required>
+      <mat-error *ngIf="isEmailMatchErr() || form.controls['confirmEmail'].hasError('required') || form.controls['confirmEmail'].hasError('email')">{{getConfirmEmailErr()}}{{isEmailMatchErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="pass" placeholder="Contraseña" (blur)="blur = true" [type]="hide ? 'password' : 'text'" required>
       <mat-icon [color]="iconColor()" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-      <mat-error *ngIf="form.controls['pass'].hasError('required')">{{getErrorMessage()}}</mat-error>
+      <mat-error *ngIf="form.controls['pass'].hasError('required')">{{getPassErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="role" placeholder="Rol">
+      <input matInput formControlName="confirmPass" placeholder="Confirmar Contraseña" (blur)="blur = true" [type]="hide ? 'password' : 'text'" required>
+      <mat-icon [color]="iconColor()" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="form.controls['confirmPass'].hasError('required') || isPassMatchErr()">{{getConfirmPassErr()}}</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Registrarse</button>
+    <mat-form-field>
+      <mat-select placeholder="Rol" formControlName="role" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{role}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['role'].hasError('required')">{{getRoleErr()}}</mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-checkbox>Enviar notificación al Correo Electrónico</mat-checkbox>
+    <br><br>
+    <button mat-raised-button color="primary" type="submit" (click)="submited = true" [disabled]="anyError()">Registrarse</button>
   </div>
 </form>
-
-<h1>{{getErrorMessage()}}</h1>
