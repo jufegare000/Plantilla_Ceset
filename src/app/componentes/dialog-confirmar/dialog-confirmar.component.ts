@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DialogConfirmarComponent implements OnInit {
 
-  mensajeConfirmacion = '';
+  mensajeConfirmacion = 'Holiwis';
   confirmado = false;
 
   constructor(

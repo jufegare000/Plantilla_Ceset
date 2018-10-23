@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -7,46 +7,28 @@ import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@a
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-
-  completed;
-  captchaResolved = false;
-
   constructor() { }
 
-  hide = true;
-  blur = false;
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    fullName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    pass: new FormControl('', [Validators.required]),
+    role: new FormControl('')
+  });
 
-  color() {
-    return this.password.hasError('required') && this.blur ? 'warn' : '';
+  hide: boolean = true;
+  blur: boolean = false;
+
+  iconColor() {
+    return this.form.controls['pass'].hasError('required') ? this.blur ? 'warn' : '' : '';
   }
 
-  resolved() {
-    this.captchaResolved = true;
+  getErrorMessage() {
+    return this.form.controls['fullName'].hasError('required') ? 'Holi' : 'Holiwis';
   }
 
-  isCompleted() {
-    return !this.email.hasError('required') && !this.email.hasError('email') && !this.password.hasError('required');
-  }
-
-  getEmailErrorMessage() {
-    return this.email.hasError('required') ? 'Digite su Email' :
-      this.email.hasError('email') ? 'Digite un Email valido' :
-        '';
-  }
-
-  getPasswordErrorMessage() {
-    return this.password.hasError('required') ? 'Digite su Contraseña' :
-      '';
-  }
-
-  buttonInfo() {
-    return this.email.hasError('required') ? 'El campo "Email" es requerido' : this.email.hasError('email') ? 'Digita un email valido' : this.password.hasError('required') ? 'El campo "Contraseña" es requerido' : !this.captchaResolved ? 'Comprueba que eres humano' : '';
-  }
-  
   ngOnInit() {
-  }
 
+  }
 }
