@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import * as deepEqual from 'deep-equal';
+
+import { ValidateMatch } from '../../validators/matchValidator';
 
 @Component({
   selector: 'app-register',
@@ -12,11 +14,11 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    fullName: new FormControl('', [Validators.required]),
+    fullName: new FormControl('', [Validators.required, Validators.minLength(10)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    confirmEmail: new FormControl('', [Validators.required, Validators.email]),
+    confirmEmail: new FormControl(''),
     pass: new FormControl('', [Validators.required]),
-    confirmPass: new FormControl('', [Validators.required]),
+    confirmPass: new FormControl(''),
     role: new FormControl('', [Validators.required])
   });
 
@@ -31,39 +33,20 @@ export class RegisterComponent implements OnInit {
   }
 
   anyError() : boolean {
-    return this.form.controls['fullName'].hasError('required') || this.form.controls['email'].hasError('required') || this.form.controls['email'].hasError('email') || this.form.controls['confirmEmail'].hasError('required') || this.form.controls['confirmEmail'].hasError('email') || this.isEmailMatchErr() || this.form.controls['pass'].hasError('required') || this.form.controls['confirmPass'].hasError('required') || this.isPassMatchErr() || this.form.controls['role'].hasError('required');
-  }
-
-  isEmailMatchErr() : boolean {
-    let email: string = this.form.controls['email'].value;
-    let confirmEmail: string = this.form.controls['confirmEmail'].value;
-    return !deepEqual(email, confirmEmail);
-  }
-
-  isPassMatchErr() : boolean {
-    let pass: string = this.form.controls['pass'].value;
-    let confirmPass: string = this.form.controls['confirmPass'].value;
-    return !deepEqual(pass, confirmPass);
+    console.log(this.form.valueChanges);
+    return this.form.invalid;
   }
 
   getNameErr() : string {
-    return this.form.controls['fullName'].hasError('required') ? 'Digita tu Nombre Completo' : '';
+    return this.form.controls['fullName'].hasError('required') || this.form.controls['fullName'].hasError('minlength') ? 'Digita tu Nombre Completo' : '';
   }
 
   getEmailErr() : string {
-    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : '';
+    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electronicos no concuerdan' : '';
   }
 
   getConfirmEmailErr() : string {
-    console.log('\nError de requerimiento: ' + this.form.controls['confirmEmail'].hasError('required'));
-    console.log('Error de email: ' + this.form.controls['confirmEmail'].hasError('email'));
-    console.log('Error de match: ' + this.isEmailMatchErr() + "\n");
-
-    let mensaje : string = this.form.controls['confirmEmail'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['confirmEmail'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.isEmailMatchErr() ? 'Los Correos Electronicos no concuerdan' : '';
-
-    console.log("\n" + mensaje + "\n");
-
-    return mensaje;
+    return this.form.controls['confirmEmail'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['confirmEmail'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electrónicos no concuerdan' : '';
   }
 
   getPassErr() : string {
@@ -71,7 +54,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getConfirmPassErr() : string {
-    return this.form.controls['confirmPass'].hasError('required') ? 'Digita tu Contraseña' : this.isPassMatchErr() ? 'Las Contraseñas no concuerdan' : '';
+    return this.form.controls['confirmPass'].hasError('required') ? 'Digita tu Contraseña' : this.form.controls['confirmPass'].hasError('match')  ? 'Las Contraseñas no concuerdan' : '';
   }
 
   getRoleErr() : string {
@@ -79,5 +62,17 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.form.controls.confirmPass.setValidators([Validators.required, ValidateMatch(this.form.controls.pass)]);
+    this.form.controls.confirmEmail.setValidators([Validators.required, Validators.email, ValidateMatch(this.form.controls.email)]);
+
+    document.getElementById('confirmEmail').onpaste = (object) => {
+      object.preventDefault();
+      alert('Acción prohibida');
+    }
+
+    document.getElementById('email').oncopy = (object) => {
+      object.preventDefault();
+      alert('Acción prohibida');
+    }
   }
 }
