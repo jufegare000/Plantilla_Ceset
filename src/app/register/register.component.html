@@ -1,0 +1,35 @@
+<div>
+  <div>
+    <div>      Registrarse   </div>
+    <form [formGroup] = "registerForm">
+      <div>
+        <mat-form-filed>
+          <input id="name"
+                 matInput
+                 formControlName="name"
+                 [(ngModel)] = "user.name"
+                 placeholder="Ingrese su nombre"/>
+        </mat-form-filed>
+
+        <mat-form-filed>
+          <input id="email"
+                 matInput
+                 formControlName="email"
+                 [(ngModel)] = "user.email"
+                 placeholder="Ingrese su Email"/>
+        </mat-form-filed>
+        
+        <mat-form-filed>
+          <input id="password"
+                 type="password"
+                 matInput
+                 formControlName="password"
+                 [(ngModel)] = "user.password"
+                 placeholder="Ingrese su contraseña"/>
+        </mat-form-filed>
+        <button mat-button type="submit">Registrarse</button>
+        <button mat-button routerLink="/login">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

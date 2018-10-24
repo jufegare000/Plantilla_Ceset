@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -32,6 +32,7 @@ import { JwtService } from './servicios/jwt.service';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -39,12 +40,14 @@ import { FooterComponent } from './componentes/footer/footer.component';
     AppComponent,
     InicioComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
     AppRoutingModule,
     MatSidenavModule,
     MatInputModule,
