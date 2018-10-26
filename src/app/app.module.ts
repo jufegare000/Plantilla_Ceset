@@ -41,7 +41,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
-
+import { RolService }from './servicios/rol.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,8 @@ import { RegisterComponent } from './componentes/register/register.component';
   providers: [
     CifradoService,
     AuthGuard,
-    JwtService
+    JwtService,
+    RolService
   ],
 
   bootstrap: [AppComponent],

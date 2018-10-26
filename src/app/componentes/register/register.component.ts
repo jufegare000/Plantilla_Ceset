@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
   }
 
   anyError() : boolean {
-    console.log(this.form.valueChanges);
     return this.form.invalid;
   }
 
