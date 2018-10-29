@@ -5,8 +5,8 @@ export class Rol{
     id: number;
     nombre: string;
 
-    constructor(estado: string, fechaCreacion: string, id:number,
-        fechaModificacion: string, nombre:string){
+    constructor(estado?: string, fechaCreacion?: string, id?:number,
+        fechaModificacion?: string, nombre?:string){
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;

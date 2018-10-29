@@ -9,6 +9,7 @@ import { Rol } from '../../modelos/rol';
 })
 export class InicioComponent implements OnInit {
   roles: Rol[];
+  rol: Rol;
   error: any;
 
   constructor(private rolSs: RolService) {
@@ -17,6 +18,13 @@ export class InicioComponent implements OnInit {
       console.log("Retornó");
       this.roles = listaRoles;
     }, error =>{
+      this.error = error;
+    });
+    this.rolSs.getById(1)
+    .subscribe(rol => {
+      console.log('Funcionó!!!');
+      this.rol = rol;
+    }, error => {
       this.error = error;
     });
   }

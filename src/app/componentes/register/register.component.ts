@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators, AbstractControl} from '@angular/form
 import * as deepEqual from 'deep-equal';
 
 import { ValidateMatch } from '../../validators/matchValidator';
+import { RolService } from '../../servicios/rol.service';
+import { Rol } from '../../modelos/rol';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +12,16 @@ import { ValidateMatch } from '../../validators/matchValidator';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor() { }
+  constructor(private rolSs: RolService) { }
+
+  rol: Rol = new Rol();
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     fullName: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    id: new FormControl('', [Validators.required]),
+    idType: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     confirmEmail: new FormControl(''),
     pass: new FormControl('', [Validators.required]),
@@ -27,6 +34,7 @@ export class RegisterComponent implements OnInit {
   submited: boolean = false;
 
   roles = ['Coordinador Académico', 'Coordinador Logístico', 'Coordinador Comercial'];
+  idTypes = ['Tarjeta de Identidad', 'Cedula de Ciudadanía', 'Cedula de Extranjería', 'Otro'];
 
   iconColor() {
     return this.form.controls['pass'].hasError('required') ? this.blur ||  this.submited ? 'warn' : '' : '';
@@ -58,6 +66,17 @@ export class RegisterComponent implements OnInit {
 
   getRoleErr() : string {
     return this.form.controls['role'].hasError('required') ? 'Elige un rol' : '';
+  }
+
+  submit() {
+    console.log(this.form.controls['id'].value);
+    this.rol.id = parseInt(this.form.controls['id'].value);
+    this.rol.estado = "en aprovacion";
+    this.rol.fechaCreacion = Date();
+    this.rol.fechaModificacion = Date();
+    this.rol.nombre = this.form.controls['fullName'].value + " " + this.form.controls['lastName'];
+
+    this.rolSs.create(this.rol);
   }
 
   ngOnInit() {

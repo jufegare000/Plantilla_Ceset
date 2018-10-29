@@ -11,4 +11,14 @@ export class RolService {
   getAll(): Observable<Rol[]>{
     return this.restangular.all('rol').getList();
   }
+
+  getById(id: number): Observable<Rol> {
+    return this.restangular.one('rol', id).get();
+  }
+
+  create(rol: Rol) {
+    this.restangular
+    .all('rol')
+    .post(rol, {}, {'content-type': 'application/json'});
+  }
 }
