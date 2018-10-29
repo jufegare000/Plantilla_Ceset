@@ -71,9 +71,7 @@ export class RegisterComponent implements OnInit {
   submit() {
     console.log(this.form.controls['id'].value);
     this.rol.id = parseInt(this.form.controls['id'].value);
-    this.rol.estado = "en aprovacion";
-    this.rol.fechaCreacion = Date();
-    this.rol.fechaModificacion = Date();
+    this.rol.estado = "En aprovacion";
     this.rol.nombre = this.form.controls['fullName'].value + " " + this.form.controls['lastName'];
 
     this.rolSs.create(this.rol);

@@ -19,6 +19,6 @@ export class RolService {
   create(rol: Rol) {
     this.restangular
     .all('rol')
-    .post(rol, {}, {'content-type': 'application/json'});
+    .post(rol);
   }
 }
