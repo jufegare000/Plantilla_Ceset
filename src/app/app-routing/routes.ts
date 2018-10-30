@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from '../componentes/inicio/inicio.component';
+import { LoginComponent } from '../componentes/login/login.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 
 export const routes: Routes = [
@@ -10,6 +11,10 @@ export const routes: Routes = [
     loadChildren: 'app/administrador/administrador.module#AdministradorModule',
     canLoad: [AuthGuard],
     data: { preload: true }
+  },
+  {
+    path: 'holi',
+    component: LoginComponent
   }
  
 ];
