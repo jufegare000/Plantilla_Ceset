@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
-import * as deepEqual from 'deep-equal';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import { ValidateMatch } from '../../validators/matchValidator';
 import { RolService } from '../../servicios/rol.service';
@@ -18,8 +17,8 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    fullName: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    name: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     id: new FormControl('', [Validators.required]),
     idType: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -37,7 +36,7 @@ export class RegisterComponent implements OnInit {
   idTypes = ['Tarjeta de Identidad', 'Cedula de Ciudadanía', 'Cedula de Extranjería', 'Otro'];
 
   iconColor() {
-    return this.form.controls['pass'].hasError('required') ? this.blur ||  this.submited ? 'warn' : '' : '';
+    return this.form.controls['confirmPass'].invalid && this.blur ? 'warn' : '';
   }
 
   anyError() : boolean {
@@ -45,7 +44,19 @@ export class RegisterComponent implements OnInit {
   }
 
   getNameErr() : string {
-    return this.form.controls['fullName'].hasError('required') || this.form.controls['fullName'].hasError('minlength') ? 'Digita tu Nombre Completo' : '';
+    return this.form.controls['name'].hasError('required') ? 'Digita tus Nombres' : '';
+  }
+
+  getLastNameErr() : string {
+    return this.form.controls['lastName'].hasError('required') ? 'Digita tus Appelidos' : '';
+  }
+
+  getIdErr() : string {
+    return this.form.controls['id'].hasError('required') ? 'Digita el Número de tu Documento' : '';
+  }
+
+  getIdTypeErr() : string {
+    return this.form.controls['idType'].hasError('required') ? 'Elige un Tipo de Documento' : '';
   }
 
   getEmailErr() : string {
@@ -72,7 +83,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.form.controls['id'].value);
     this.rol.id = parseInt(this.form.controls['id'].value);
     this.rol.estado = "En aprovacion";
-    this.rol.nombre = this.form.controls['fullName'].value + " " + this.form.controls['lastName'];
+    this.rol.nombre = this.form.controls['name'].value + " " + this.form.controls['lastName'].value;
 
     this.rolSs.create(this.rol);
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,42 +8,44 @@ import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@a
 })
 export class LoginComponent implements OnInit {
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    pass: new FormControl('', [Validators.required])
+  });
 
-  completed;
-  captchaResolved = false;
+  captchaResolved: boolean = false;
 
   constructor() { }
 
-  hide = true;
-  blur = false;
+  hide: boolean = true;
+  blur: boolean = false;
 
-  color() {
-    return this.password.hasError('required') && this.blur ? 'warn' : ''; 
+  iconColor() {
+    return this.form.controls['pass'].invalid && this.blur ? 'warn' : '';
   }
 
   resolved() {
     this.captchaResolved = true;
+    setTimeout(() => {
+      this.captchaResolved = false;
+    }, 120000)
+  }
+  
+  getEmailErr() : string {
+    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electronicos no concuerdan' : '';
   }
 
-  isCompleted() {
-    return !this.email.hasError('required') && !this.email.hasError('email') && !this.password.hasError('required') && this.captchaResolved;
-  }
-
-  getEmailErrorMessage() {
-    return this.email.hasError('required') ? 'Digite su Email' :
-      this.email.hasError('email') ? 'Digite un Email valido' :
-      '';
-  }
-
-  getPasswordErrorMessage() {
-    return this.password.hasError('required') ? 'Digite su Contraseña' :
-      '';
+  getPassErr() : string {
+    return this.form.controls['pass'].hasError('required') ? 'Digita tu Contraseña' : '';
   }
 
   buttonInfo() {
-    return this.email.hasError('required') ? 'El campo "Email" es requerido' : this.email.hasError('email') ? 'Digita un email valido' : this.password.hasError('required') ? 'El campo "Contraseña" es requerido' : !this.captchaResolved ? 'Comprueba que eres humano' : '';
+    return this.form.controls['email'].hasError('required') ? 'El campo "Email" es requerido' : this.form.controls['email'].hasError('email') ? 'Digita un email valido' : this.form.controls['pass'].hasError('required') ? 'El campo "Contraseña" es requerido' : !this.captchaResolved ? 'Comprueba que eres humano' : '';
+  }
+
+  goToRegister() {
+    
   }
 
   ngOnInit() {

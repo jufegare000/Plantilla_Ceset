@@ -1,24 +1,21 @@
-<div class="container">
-  <mat-form-field hideRequiredMarker>
-    <input matInput [formControl]="email" placeholder="Email" required>
-    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-  </mat-form-field>
-
-  <br>
-
-  <mat-form-field>
-    <input matInput [formControl]="password" (blur)="blur = true" placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
-    <mat-icon [color]="color()" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
-  </mat-form-field>
-
-  <br>
-  <br>
-
-  <re-captcha (resolved)="resolved(this)" siteKey="6LefZHUUAAAAABw7Rp-hlMrkPZIuhvQOBOIyEuza"></re-captcha>
-
-  <br>
-
-  <button mat-raised-button color="primary" [title]="buttonInfo()" [disabled]="!isCompleted()">Entrar</button>
-  <button mat-raised-button>Registrarse</button>
-</div>
+<mat-card>
+  <form [formGroup]="this.form">
+    <div class="controls-form">
+      <input type="hidden" formControlName="$key">
+      <mat-form-field hideRequiredMarker>
+        <input matInput formControlName="email" placeholder="Email" required>
+        <mat-error *ngIf="this.form.controls['email'].hasError('required') || this.form.controls['email'].hasError('email')">{{getEmailErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="pass" (blur)="blur = true" placeholder="Contraseña" [type]="hide ? 'password' : 'text'" required>
+        <mat-icon matSuffix class="pointer" [color]="iconColor()" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="this.form.controls['pass'].hasError('required')">{{getPassErr()}}</mat-error>
+      </mat-form-field>
+      <div class="recaptcha">
+        <re-captcha (resolved)="resolved()" siteKey="6LefZHUUAAAAABw7Rp-hlMrkPZIuhvQOBOIyEuza" required></re-captcha>
+      </div>
+      <button mat-raised-button class="button" color="primary" [title]="buttonInfo()" [disabled]="this.form.invalid || !this.captchaResolved">Entrar</button>
+      <button class="button" mat-raised-button (click)="goToRegister()">Registrarse</button>
+    </div>
+  </form>
+</mat-card>

@@ -79,6 +79,7 @@ import { RolService }from './servicios/rol.service';
     MatAutocompleteModule,
     MatOptionModule,
     MatCheckboxModule,
+    MatCardModule,
     RecaptchaModule.forRoot()
   ],
   providers: [
