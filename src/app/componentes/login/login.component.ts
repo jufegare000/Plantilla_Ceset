@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   captchaResolved: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   hide: boolean = true;
   blur: boolean = false;
@@ -31,12 +33,12 @@ export class LoginComponent implements OnInit {
       this.captchaResolved = false;
     }, 120000)
   }
-  
-  getEmailErr() : string {
+
+  getEmailErr(): string {
     return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electronicos no concuerdan' : '';
   }
 
-  getPassErr() : string {
+  getPassErr(): string {
     return this.form.controls['pass'].hasError('required') ? 'Digita tu Contraseña' : '';
   }
 
@@ -45,7 +47,11 @@ export class LoginComponent implements OnInit {
   }
 
   goToRegister() {
-    
+     this.router.navigateByUrl('/registro');
+  }
+
+  onSubmit() {
+    console.log("Submited :)");
   }
 
   ngOnInit() {

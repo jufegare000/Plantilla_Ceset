@@ -28,9 +28,11 @@ export class LoginService {
 
 
 
-  constructor(private restangular: Restangular,
+  constructor(
+    private restangular: Restangular,
     public router: Router,
-    private jwtService: JwtService) { }
+    private jwtService: JwtService
+  ) { }
 
   obtenerRol(): any {
     return this.rol;
@@ -42,7 +44,6 @@ export class LoginService {
 
 
   autenticar(usuario: string, clave: string, rol: number): Observable<any> {
-    
     return this.restangular.one('usuarios/autenticar').get({ usuario: usuario, clave: clave, rol: rol });
 
   }
@@ -64,6 +65,7 @@ export class LoginService {
   }
 
   obtenerTokenJWT(): string {
+    console.log(localStorage.getItem(TOKEN_NAME));
     return localStorage.getItem(TOKEN_NAME);
   }
 

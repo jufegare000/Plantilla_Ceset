@@ -25,7 +25,8 @@ import {
   MatOptionModule,
   MatAutocompleteModule,
   MatNativeDateModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatListModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -42,6 +43,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { RolService }from './servicios/rol.service';
+import { NotificationCardComponent } from './componentes/notification-card/notification-card.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { RolService }from './servicios/rol.service';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotificationCardComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ import { RolService }from './servicios/rol.service';
     MatOptionModule,
     MatCheckboxModule,
     MatCardModule,
-    RecaptchaModule.forRoot()
+    RecaptchaModule.forRoot(),
+    MatListModule
   ],
   providers: [
     CifradoService,

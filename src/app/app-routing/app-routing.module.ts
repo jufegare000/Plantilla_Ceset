@@ -13,7 +13,7 @@ import { AuthGuard } from '../auth/auth-guard.service';
     RouterModule.forRoot(
       routes,
       {
-        enableTracing: true, // <-- debugging purposes only
+        enableTracing: false, // <-- debugging purposes only
         preloadingStrategy: SelectivePreloadingStrategy,
 
       }

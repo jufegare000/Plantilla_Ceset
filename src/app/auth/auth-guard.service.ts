@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-
     if (this.loginService.esSesionIniciada()) {
       if (url == "/inicio" || url == "/") {
         let navigationExtrasProf: NavigationExtras = {
@@ -71,6 +70,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       queryParamsHandling: 'preserve',
       preserveFragment: true
     };
+    console.log(navigationExtrasProf);
     // Se verifica si la ruta es /inicio o / para que no haga la redirección
     if (url != "/inicio" && url != "/") {
       // Navigate to the home page with extras

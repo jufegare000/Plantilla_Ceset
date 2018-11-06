@@ -1,0 +1,21 @@
+.button, .select {
+    background: black;
+    width: 50% !important;
+}
+
+.select {
+    margin-right: 3%;
+}
+
+.options {
+    width: 97%;
+}
+
+.buttonsito {
+    margin-right: 3%;
+    width: 44%;
+}
+
+.mat-button .mat-small {
+    min-width: 1%;
+}
