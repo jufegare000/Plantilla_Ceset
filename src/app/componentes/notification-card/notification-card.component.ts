@@ -72,4 +72,10 @@ export class NotificationCardComponent implements OnInit {
     }
   ];
 
+  inputFocus = false
+
+  click() {
+    console.log('Holi :)');
+  }
+
 }

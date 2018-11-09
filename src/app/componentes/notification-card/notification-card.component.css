@@ -1,10 +1,25 @@
+.mat-card {
+    margin-top: 100px;
+    width: 50%;
+    cursor: pointer;
+}
+
+.special {
+    border-top: 50px;
+}
+
 .button, .select {
-    background: black;
-    width: 50% !important;
+    
+    width: 80% !important;
 }
 
 .select {
-    margin-right: 3%;
+    margin-right: 2%;
+}
+
+.input, form, .mat-form-field, input {
+    width: 90% !important;
+    margin-right: 2%;
 }
 
 .options {
@@ -18,4 +33,8 @@
 
 .mat-button .mat-small {
     min-width: 1%;
+}
+
+.item:hover {
+    background-color: lightgray;
 }

@@ -1,20 +1,32 @@
-<mat-card>
-  <mat-list>
-    <mat-list-item *ngFor="let notification of notifications">
-      <h4 mat-line>{{notification.name}}</h4>
-      <p mat-line> {{notification.content}} {{this.hello}}</p>
-      <div matSuffix class="button" *ngIf="notification.type == 'confirm'">
-        <button class="buttonsito" *ngFor="let button of notification.options" mat-raised-button [color]="button.color" (click)="hello = !hello">{{button.content}}</button>
-      </div>
-      <div matSuffix class="select" *ngIf="notification.type == 'option'">
-        <mat-select class="options" placeholder="Opciones">
-          <mat-option>--</mat-option>
-          <mat-option *ngFor="let option of notification.options" [value]="option">
-            {{option}}
-          </mat-option>
-        </mat-select>
-      </div>
-      <mat-icon matSuffix>close</mat-icon>
-    </mat-list-item>
+<mat-card class="mat-card">
+  <mat-list dense>
+    <div *ngFor="let notification of notifications">
+      <mat-list-item class="item">
+        <h4 mat-line *ngIf="notification.type != 'input'">{{notification.name}}</h4>
+        <p mat-line *ngIf="notification.type != 'input'"> {{notification.content}} </p>
+        <div matSuffix class="button" *ngIf="notification.type == 'confirm'">
+          <button class="buttonsito" *ngFor="let button of notification.options" mat-raised-button [color]="button.color" (click)="hello = !hello">{{button.content}}</button>
+        </div>
+        <div matSuffix class="select" *ngIf="notification.type == 'option'">
+          <mat-select class="options" placeholder="Opciones">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let option of notification.options" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </div>
+        <h4 mat-line class="special" *ngIf="notification.type == 'input' && !this.inputFocus">{{notification.name}}</h4>
+        <p mat-line *ngIf="notification.type == 'input'"></p>
+        <div mat-line class="input" *ngIf="notification.type == 'input'">
+          <form action="">
+            <mat-form-field hideRequiredMarker class="mat-form-field">
+              <input matInput type="text" (blur)="this.inputFocus = false" (focus)="inputFocus = true" [placeholder]="notification.content" required>
+            </mat-form-field>
+          </form>
+        </div>
+        <button mat-icon-button matSuffix><mat-icon>close</mat-icon></button>
+      </mat-list-item>
+      <mat-divider *ngIf="notification != notifications[notifications.length - 1]"></mat-divider>
+    </div>
   </mat-list>
 </mat-card>
