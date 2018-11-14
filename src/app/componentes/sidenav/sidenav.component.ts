@@ -26,6 +26,7 @@ export class SidenavComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
   ngOnInit() {
+    this.sidenav.open();
     // Si la resolución es menos de 600px entonces cierra el sidenav
     if (this.mobileQuery.matches) {
       this.sidenav.opened = false;

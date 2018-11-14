@@ -84,7 +84,8 @@ import { NotificationCardComponent } from './componentes/notification-card/notif
     MatCheckboxModule,
     MatCardModule,
     RecaptchaModule.forRoot(),
-    MatListModule
+    MatListModule,
+    MatSidenavModule
   ],
   providers: [
     CifradoService,

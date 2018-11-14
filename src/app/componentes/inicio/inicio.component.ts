@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RolService } from '../../servicios/rol.service';
 import { Rol } from '../../modelos/rol';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
   selector: 'app-inicio',
