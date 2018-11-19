@@ -5,6 +5,7 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { RegisterComponent } from '../componentes/register/register.component';
 import { FooterComponent } from '../componentes/footer/footer.component';
 import { NotificationCardComponent } from '../componentes/notification-card/notification-card.component';
+import { ActivityListComponent } from '../componentes/activity-list/activity-list.component';
 
 export const routes: Routes = [
  { path: 'inicio',  component: InicioComponent, canActivate: [AuthGuard] },
@@ -25,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: FooterComponent
+    component: ActivityListComponent
   },
   { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
  

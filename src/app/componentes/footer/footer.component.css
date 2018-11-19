@@ -1,14 +1,8 @@
 #footer{
-    background: #f3f3f3;
-    position: absolute;
+    position: sticky;
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 1rem;
-    margin: 0 auto 0 !important;
-    max-width: 940px !important;
-    width: 94% !important;
-    z-index: 4;
 }
 @media screen and (max-width: 600px) {
     #footer{

@@ -26,7 +26,11 @@ import {
   MatAutocompleteModule,
   MatNativeDateModule,
   MatCheckboxModule,
-  MatListModule
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatPaginatorIntl,
+  MatSortModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -44,6 +48,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { RolService }from './servicios/rol.service';
 import { NotificationCardComponent } from './componentes/notification-card/notification-card.component';
+import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/activity-list/activity-list.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,8 @@ import { NotificationCardComponent } from './componentes/notification-card/notif
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    NotificationCardComponent
+    NotificationCardComponent,
+    ActivityListComponent
   ],
   imports: [
     BrowserModule,
@@ -85,13 +91,20 @@ import { NotificationCardComponent } from './componentes/notification-card/notif
     MatCardModule,
     RecaptchaModule.forRoot(),
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     CifradoService,
     AuthGuard,
     JwtService,
-    RolService
+    RolService,
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorIntlSpanish
+    }
   ],
 
   bootstrap: [AppComponent],

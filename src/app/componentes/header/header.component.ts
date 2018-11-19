@@ -12,6 +12,10 @@ export class HeaderComponent implements OnInit {
   
   mobileQuery: MediaQueryList;
 
+  hideActivityList: boolean;
+  hideCohortList: boolean;
+  hideOther: boolean;
+
   private _mobileQueryListener: () => void;
 
   constructor(public loginService: LoginService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
@@ -21,7 +25,33 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    this.hideActivityList = true;
+    this.hideCohortList = true;
+    this.hideOther = true;
+  }
+
+  array = [,,,,,,,,,,,,,,,,,,,,,,];
+
+  show(component: number): void {
+    switch(component) {
+      case 0:
+        this.hideActivityList = false;
+        this.hideCohortList = true;
+        this.hideOther = true;
+        break;
+      case 1:
+        this.hideActivityList = true;
+        this.hideCohortList = false;
+        this.hideOther = true;
+        break;
+      case 2:
+        this.hideActivityList = true;
+        this.hideCohortList = true;
+        this.hideOther = false;
+        break;
+      default:
+        break;
+    }
   }
 
   ngOnDestroy(): void {

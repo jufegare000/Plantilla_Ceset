@@ -1,0 +1,22 @@
+.example-header, .example-container {
+    margin: 1rem;
+    max-width: 80%;
+    min-width: 80%;
+    display: inline-block;
+}
+
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    min-width: 300px;
+}
+
+.mat-column-code,
+.mat-column-detail {
+  max-width: 100px;
+}
+
+.button {
+    right: 0;
+    display: inline-block;
+}
