@@ -3,6 +3,7 @@ import { InicioComponent } from '../componentes/inicio/inicio.component';
 import { LoginComponent } from '../componentes/login/login.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { RegisterComponent } from '../componentes/register/register.component';
+import { FooterComponent } from '../componentes/footer/footer.component';
 import { NotificationCardComponent } from '../componentes/notification-card/notification-card.component';
 
 export const routes: Routes = [
@@ -24,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: NotificationCardComponent
+    component: FooterComponent
   },
   { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
  
