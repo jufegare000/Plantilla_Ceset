@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild , Injectable} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource, MatPaginatorIntl} from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activity-list',
@@ -13,7 +14,7 @@ export class ActivityListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private router: Router) {
     // Create 100 users
     const users: UserData[] = [];
     for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
@@ -35,6 +36,10 @@ export class ActivityListComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  openDev() {
+    this.router.navigate(['/dev']);
   }
 
   ngOnInit() {

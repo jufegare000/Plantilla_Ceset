@@ -30,7 +30,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatPaginatorIntl,
-  MatSortModule
+  MatSortModule,
+  MatExpansionModule
 } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -49,6 +50,7 @@ import { RegisterComponent } from './componentes/register/register.component';
 import { RolService }from './servicios/rol.service';
 import { NotificationCardComponent } from './componentes/notification-card/notification-card.component';
 import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/activity-list/activity-list.component';
+import { ActivityDetailComponent } from './componentes/activity-detail/activity-detail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/ac
     LoginComponent,
     RegisterComponent,
     NotificationCardComponent,
-    ActivityListComponent
+    ActivityListComponent,
+    ActivityDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +97,8 @@ import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/ac
     MatSidenavModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatExpansionModule
   ],
   providers: [
     CifradoService,

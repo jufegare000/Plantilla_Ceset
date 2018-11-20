@@ -1,0 +1,166 @@
+<mat-card>
+  <form class="controls-form" [formGroup]="this.generalForm">
+    <input type="hidden" formControlName="$key">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nombre de la Actividad" required>
+      <mat-error *ngIf="generalForm.controls['name'].hasError('required')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Tipo de Actividad" formControlName="type" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="generalForm.controls['type'].hasError('required')">{{getTypeErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Dependencia" formControlName="dependency" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let dependency of dependencies" [value]="dependency">
+          {{dependency}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="generalForm.controls['type'].hasError('required')">{{getTypeErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="resGroup" placeholder="Grupo de Investigación" required>
+      <mat-error *ngIf="generalForm.controls['resGroup'].hasError('required')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="coordinator" placeholder="Coordinador de la Actividad" required>
+      <mat-error *ngIf="generalForm.controls['coordinator'].hasError('required')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="phone" placeholder="Teléfono de Contacto" required>
+      <mat-error *ngIf="generalForm.controls['phone'].hasError('required')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput id="email" formControlName="email" placeholder="Correo Electrónico" required>
+      <mat-error *ngIf="generalForm.controls['email'].hasError('required') || generalForm.controls['email'].hasError('email')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="duration" placeholder="Duracion en Meses" required>
+      <mat-error *ngIf="generalForm.controls['duration'].hasError('required')">{{getNameErr()}}</mat-error>
+    </mat-form-field>
+    <br><br>
+  </form>
+  
+  <mat-accordion multi="true">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Contrato
+        </mat-panel-title>
+        <mat-panel-description>
+          &lowast; Sí aplica
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form class="controls-form" [formGroup]="this.contractForm">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <input matInput formControlName="type" placeholder="Tipo de Contrato" required>
+          <mat-error *ngIf="contractForm.controls['type'].hasError('required')">{{getNameErr()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="entity" placeholder="Entidad" required>
+          <mat-error *ngIf="contractForm.controls['entity'].hasError('required')">{{getNameErr()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="startDate" [matDatepicker]="startDate" placeholder="Fecha de Inicialización">
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+          <mat-error *ngIf="contractForm.controls['startDate'].hasError('required')">{{getNameErr()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="endDate" [matDatepicker]="endDate" placeholder="Fecha de Finalización">
+          <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+          <mat-datepicker #endDate></mat-datepicker>
+          <mat-error *ngIf="contractForm.controls['endDate'].hasError('required')">{{getNameErr()}}</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Presupuesto
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="this.budgetForm">
+        <input type="hidden" formControlName="$key">
+        <mat-form-field>
+          <input matInput formControlName="value" placeholder="Valor" required>
+          <mat-icon matSuffix>monetization_on</mat-icon>
+          <mat-icon matSuffix>monetization_on</mat-icon>
+          <mat-error *ngIf="contractForm.controls['type'].hasError('required')">{{getNameErr()}}</mat-error>
+        </mat-form-field>
+      </form>
+      
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cofinanciación
+          </mat-panel-title>
+          <mat-panel-description>
+            &lowast; Sí aplica
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+          <form [formGroup]="this.cofinancingForm">
+            <input type="hidden" formControlName="$key">
+            <mat-form-field>
+              <input matInput formControlName="entity" placeholder="Entidad" required>
+              <mat-error *ngIf="cofinancingForm.controls['entity'].hasError('required')">{{getNameErr()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="concept" placeholder="Concepto" required>
+              <mat-error *ngIf="cofinancingForm.controls['concept'].hasError('required')">{{getNameErr()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="value" placeholder="Valor" required>
+              <mat-error *ngIf="cofinancingForm.controls['value'].hasError('required')">{{getNameErr()}}</mat-error>
+            </mat-form-field>
+          </form>
+        </mat-expansion-panel>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Cofinanciación
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="this.cohortForm">
+          <input type="hidden" formControlName="$key">
+          <mat-form-field>
+            <input matInput formControlName="startDate" [matDatepicker]="startDateCohort" placeholder="Fecha de Inicialización">
+            <mat-datepicker-toggle matSuffix [for]="startDateCohort"></mat-datepicker-toggle>
+            <mat-datepicker #startDateCohort></mat-datepicker>
+            <mat-error *ngIf="cohortForm.controls['startDate'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="endDate" [matDatepicker]="endDateCohort" placeholder="Fecha de Finalización">
+            <mat-datepicker-toggle matSuffix [for]="endDateCohort"></mat-datepicker-toggle>
+            <mat-datepicker #endDateCohort color="warn"></mat-datepicker>
+            <mat-error *ngIf="cohortForm.controls['endDate'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="reuneCode" placeholder="Código REUNE" required>
+            <mat-error *ngIf="cohortForm.controls['reuneCode'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="sigepCode" placeholder="Código SIGEP" required>
+            <mat-error *ngIf="cohortForm.controls['sigepCode'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br><br>
+
+  <button mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear Actividad</button>
+
+</mat-card>

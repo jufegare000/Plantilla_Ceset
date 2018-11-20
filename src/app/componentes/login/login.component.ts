@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Submited :)");
+    this.router.navigate(['/inicio']);
   }
 
   ngOnInit() {
