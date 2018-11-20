@@ -9,7 +9,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+
   mobileQuery: MediaQueryList;
 
   hideActivityList: boolean;

@@ -28,6 +28,6 @@ export const routes: Routes = [
     path: 'dev',
     component: ActivityListComponent
   },
-  { path: '**', redirectTo: '/inicio', pathMatch: 'full' }
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
  
 ];

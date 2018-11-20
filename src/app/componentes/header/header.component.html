@@ -1,39 +1,13 @@
-<!--<div class="header">
-
-    <div class="barra-institucional">
-        <div class="header-logo">
-            <a href="http://www.udea.edu.co/" target="_blank">
-                <img src="./assets/logo-ingenieria-udea.svg" alt="Logo Ingeniería UdeA">
-            </a>
-        </div>--><!--.header-logo-->
-<!--        <div class="nombre-sitio">
-            <h1>
-                <small>nombre de la</small><br>
-                Aplicación</h1>
-        </div>--><!--.nombre-sitio-->
-
-<!--    </div>--><!--.barra-institucional-->
-
-<!--    <mat-toolbar color="primary" class="toolbar-header">
-        <span>
-            <i class="material-icons font-mid">assessment</i>
-        </span>
-
-
-        <span class="flex-spacer"></span>
-        <div class="menu-cuenta" *ngIf="loginService.esSesionIniciada()">
-            <i [matMenuTriggerFor]="menu" class="material-icons icono-cuenta">account_circle</i>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="loginService.cerrarSesion()">Cerrar sesión</button>
-            </mat-menu>
-        </div>-->
-        <!-- .menu-cuenta -->
-
-<!--    </mat-toolbar>
-</div>--><!--.container-->
-
 <mat-toolbar color="primary">
     <button
+        *ngIf="drawer.opened"
+        type="button"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon>close</mat-icon>
+    </button>
+    <button
+        *ngIf="!drawer.opened"
         type="button"
         mat-icon-button
         (click)="drawer.toggle()">
@@ -58,7 +32,7 @@
     </mat-sidenav>
     <mat-sidenav-content fullscreen>
         <app-activity-list *ngIf="!hideActivityList"></app-activity-list>
-        <app-footer></app-footer>
         <router-outlet></router-outlet>
+        <app-footer></app-footer>
     </mat-sidenav-content>
 </mat-sidenav-container>
