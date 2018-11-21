@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
-  displayedColumns = ['code', 'name', 'attendant', 'detail'];
+  displayedColumns = ['code', 'name', 'attendant'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,14 +32,18 @@ export class ActivityListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  clicked(row) {
+    this.router.navigate(['/inicio/actividades/editar/' + row.code]);
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
-  openDev() {
-    this.router.navigate(['/dev']);
+  createActivity() {
+    this.router.navigate(['/inicio/actividades/crear']);
   }
 
   ngOnInit() {
@@ -56,8 +60,7 @@ function createNewUser(id: number): UserData {
   return {
     code: id.toString(),
     name: name,
-    attendant: Math.round(Math.random() * 100).toString(),
-    detail: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+    attendant: Math.round(Math.random() * 100).toString()
   };
 }
 
@@ -72,7 +75,6 @@ export interface UserData {
   code: string;
   name: string;
   attendant: string;
-  detail: string;
 }
 
 @Injectable()

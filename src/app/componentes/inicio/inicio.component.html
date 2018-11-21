@@ -1,1 +1,41 @@
-<app-header></app-header>
+<!-- Header -->
+    <mat-toolbar color="primary">
+        <button
+            *ngIf="drawer.opened"
+            type="button"
+            mat-icon-button
+            (click)="drawer.toggle()">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button
+            *ngIf="!drawer.opened"
+            type="button"
+            mat-icon-button
+            (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1>CESET</h1>
+    </mat-toolbar>
+<!---->
+<!--SideNav-->
+    <mat-sidenav-container fullscreen class="container">
+        <mat-sidenav
+            #drawer
+            class="sidenav"
+            [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <mat-toolbar color="primary">Menu</mat-toolbar>
+            <mat-nav-list>
+                <a mat-list-item [ngClass]="{'selected' : this.router.url === '/inicio/actividades'}" [routerLink]="['actividades']" (click)="drawer.toggle()">Lista de Actividades</a>
+                <a mat-list-item [ngClass]="{'selected' : this.router.url === '/inicio/actividades/crear'}" [routerLink]="['actividades/crear']" (click)="drawer.toggle()">Crear Actividad</a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content (click)="toggleDrawer(drawer)" fullscreen>
+            <!-- Body -->
+                <router-outlet></router-outlet>
+                <app-footer></app-footer>
+            <!---->
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+<!---->

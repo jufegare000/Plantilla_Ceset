@@ -20,3 +20,8 @@
     right: 0;
     display: inline-block;
 }
+
+.table > *:hover {
+    background: #F0F0F0;
+    cursor: pointer;
+}

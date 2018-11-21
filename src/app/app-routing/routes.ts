@@ -9,16 +9,30 @@ import { ActivityListComponent } from '../componentes/activity-list/activity-lis
 import { ActivityDetailComponent } from '../componentes/activity-detail/activity-detail.component';
 
 export const routes: Routes = [
- {
-   path: 'inicio',
-   canActivate: [AuthGuard],
-   children: [{
-     path: 'actividades',
-     component: ActivityListComponent
-   }]
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
   },
- { path: '', redirectTo: '/login', pathMatch: 'full' },
- {
+  {
+   path: 'inicio',
+   component: InicioComponent,
+   children: [
+     {
+       path: 'actividades',
+       component: ActivityListComponent
+     },
+     {
+      path: 'actividades/crear',
+      component: ActivityDetailComponent
+    },
+    {
+      path: 'actividades/editar/:code',
+      component: ActivityDetailComponent
+    }
+   ]
+  },
+  {
     path: 'administrador',
     loadChildren: 'app/administrador/administrador.module#AdministradorModule',
     canLoad: [AuthGuard],
