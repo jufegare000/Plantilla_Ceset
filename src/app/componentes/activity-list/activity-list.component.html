@@ -20,7 +20,7 @@
 
 <div class="example-container mat-elevation-z8">
 
-  <mat-table class="table" [dataSource]="dataSource" matSort>
+  <mat-table [dataSource]="dataSource" matSort>
 
     <!-- Code Column -->
     <ng-container matColumnDef="code" style="max-width: 50px">
@@ -41,7 +41,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clicked(row)">
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="item" (click)="clicked(row)">
     </mat-row>
   </mat-table>
 

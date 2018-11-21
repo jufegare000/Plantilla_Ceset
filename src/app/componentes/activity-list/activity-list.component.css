@@ -21,7 +21,13 @@
     display: inline-block;
 }
 
+/**
 .table > *:hover {
     background: #F0F0F0;
+    cursor: pointer;
+}**/
+
+.item:hover {
+    background: #F5F5F5;
     cursor: pointer;
 }
