@@ -51,6 +51,7 @@ import { RolService }from './servicios/rol.service';
 import { NotificationCardComponent } from './componentes/notification-card/notification-card.component';
 import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/activity-list/activity-list.component';
 import { ActivityDetailComponent } from './componentes/activity-detail/activity-detail.component';
+import { BudgetComponent } from './componentes/budget/budget.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { ActivityDetailComponent } from './componentes/activity-detail/activity-
     RegisterComponent,
     NotificationCardComponent,
     ActivityListComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    BudgetComponent
   ],
   imports: [
     BrowserModule,

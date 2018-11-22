@@ -7,6 +7,7 @@ import { FooterComponent } from '../componentes/footer/footer.component';
 import { NotificationCardComponent } from '../componentes/notification-card/notification-card.component';
 import { ActivityListComponent } from '../componentes/activity-list/activity-list.component';
 import { ActivityDetailComponent } from '../componentes/activity-detail/activity-detail.component';
+import { BudgetComponent } from '../componentes/budget/budget.component';
 
 export const routes: Routes = [
   {
@@ -48,7 +49,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: ActivityDetailComponent
+    component: BudgetComponent
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
  
