@@ -2,3 +2,12 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
+.pointer:hover {
+    cursor: pointer;
+    color: gray !important;
+}
+
+.disabled {
+    color: lightgray;
+}

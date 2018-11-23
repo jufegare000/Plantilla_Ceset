@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-budget',
@@ -9,7 +10,35 @@ import {MatTableDataSource} from '@angular/material';
 export class BudgetComponent implements OnInit {
 
   displayedColumns = ['name', 'value'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  sub: any;
+  params: any;
+
+  budgetData: Item[]  = [
+    { id: 0, name: 'Personal/Recurso Humano', value: 1234567890 },
+    { id: 1, name: 'Materiales/Suministros/Obra Fisica', value: 0 },
+    { id: 2, name: 'Equipos/Maquinaria', value: 0 },
+    { id: 3, name: 'Transporte/Sostenimiento en Campo', value: 0 },
+    { id: 4, name: 'Gastronomía', value: 0 },
+    { id: 5, name: 'Estrategia Comunicacional/Comercial', value: 0 },
+    { id: 6, name: 'Comunicaciones', value: 0 },
+    { id: 7, name: 'Locaciones', value: 0 },
+    { id: 8, name: 'Software', value: 0 },
+    { id: 9, name: 'Otros', value: 0 }
+  ];
+
+  udeaContributions: Item[] = [
+    { id: 0, name: 'Manejo y Costos Administración (10%)', value: 0 },
+    { id: 1, name: 'Educación Continua', value: 0 }
+  ];
+
+  engContributions: Item[] = [
+    { id: 0, name: 'Educación Continua', value: 0 }
+  ];
+
+  budgetDataSource = new MatTableDataSource(this.budgetData);
+  contrUdeaDataSource = new MatTableDataSource(this.udeaContributions);
+  contrEngDataSource = new MatTableDataSource(this.engContributions);
 
   parseValue(value: number) {
     let strValue: string = value.toString();
@@ -20,27 +49,57 @@ export class BudgetComponent implements OnInit {
     return `${startSub}'${midSub}.${endSub}`;
   }
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
+
+  goToBudgetItem(id: number) {
+    let page: string;
+    switch (id) {
+      case 0:
+        page = 'personal';
+        break;
+      case 1:
+        page = 'materiales';
+        break;
+      case 2:
+        page = 'equipos';
+        break;
+      case 3:
+        page = 'transporte';
+        break;
+      case 4:
+        page = 'gastronomia';
+        break;
+      case 5:
+        page = 'comercial';
+        break;
+      case 6:
+        page = 'comunicaciones';
+        break;
+      case 7:
+        page = 'locaciones';
+        break;
+      case 8:
+        page = 'software';
+        break;
+      case 9:
+        page = 'otros';
+        break;
+      default:
+        page = 'otros';
+        break;
+    }
+    this.router.navigate([`inicio/actividades/editar/${this.params['code']}/presupuesto/${page}`]);
+  }
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => { this.params = params });
   }
 
 }
 
 export interface Item {
+  id: number;
   name: string;
   value: number;
 }
-
-const ELEMENT_DATA: Item[] = [
-  { name: 'Personal/Recurso Humano', value: 1234567890 },
-  { name: 'Materiales/Suministros/Obra Fisica', value: 0 },
-  { name: 'Equipos/Maquinaria', value: 0 },
-  { name: 'Transporte/Sostenimiento en Campo', value: 0 },
-  { name: 'Gastronomía', value: 0 },
-  { name: 'Estrategia Comunicacional/Comercial', value: 0 },
-  { name: 'Comunicaciones', value: 0 },
-  { name: 'Locaciones', value: 0 },
-  { name: 'Software', value: 0 },
-  { name: 'Otros', value: 0 }
-];

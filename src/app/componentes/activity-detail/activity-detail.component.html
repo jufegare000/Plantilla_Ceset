@@ -91,10 +91,9 @@
 
       <form [formGroup]="this.budgetForm">
         <input type="hidden" formControlName="$key">
-        <mat-form-field>
-          <input matInput formControlName="value" placeholder="Valor" required>
-          <mat-icon matSuffix>monetization_on</mat-icon>
-          <mat-icon matSuffix>monetization_on</mat-icon>
+        <mat-form-field class="pointer" (click)="goToBudget()">
+          <input matInput class="pointer" formControlName="value" placeholder="Valor" disabled required>
+          <mat-icon class="disabled pointer" matSuffix>monetization_on</mat-icon>
           <mat-error *ngIf="contractForm.controls['type'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
       </form>
@@ -108,28 +107,28 @@
             &lowast; Sí aplica
           </mat-panel-description>
         </mat-expansion-panel-header>
-          <form [formGroup]="this.cofinancingForm">
-            <input type="hidden" formControlName="$key">
-            <mat-form-field>
-              <input matInput formControlName="entity" placeholder="Entidad" required>
-              <mat-error *ngIf="cofinancingForm.controls['entity'].hasError('required')">{{getNameErr()}}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput formControlName="concept" placeholder="Concepto" required>
-              <mat-error *ngIf="cofinancingForm.controls['concept'].hasError('required')">{{getNameErr()}}</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput formControlName="value" placeholder="Valor" required>
-              <mat-error *ngIf="cofinancingForm.controls['value'].hasError('required')">{{getNameErr()}}</mat-error>
-            </mat-form-field>
-          </form>
-        </mat-expansion-panel>
+        <form [formGroup]="this.cofinancingForm">
+          <input type="hidden" formControlName="$key">
+          <mat-form-field>
+            <input matInput formControlName="entity" placeholder="Entidad" required>
+            <mat-error *ngIf="cofinancingForm.controls['entity'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="concept" placeholder="Concepto" required>
+            <mat-error *ngIf="cofinancingForm.controls['concept'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="value" placeholder="Valor" required>
+            <mat-error *ngIf="cofinancingForm.controls['value'].hasError('required')">{{getNameErr()}}</mat-error>
+          </mat-form-field>
+        </form>
+      </mat-expansion-panel>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Cofinanciación
+          Cohorte
         </mat-panel-title>
       </mat-expansion-panel-header>
 

@@ -1,18 +1,82 @@
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
-    </ng-container>
+<mat-card class="container">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="budgetDataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Rubro </mat-header-cell>
+        <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+      </ng-container>
 
-    <!-- Value Column -->
-    <ng-container matColumnDef="value">
-      <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
-      <mat-cell *matCellDef="let item"> $ {{parseValue(item.value)}} </mat-cell>
-    </ng-container>
+      <!-- Value Column -->
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+        <mat-cell *matCellDef="let item"> $ {{parseValue(item.value)}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row class="item" (click)="goToBudgetItem(row.id)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <br>
+  <p class="label">SUBTOTAL COSTO PROYECTO</p><p class="value">$ {{parseValue(1234567890)}}</p>
+  <p class="label">IMPREVISTOS (3%)</p><p class="value">$ 00000000</p>
+  <p class="label"><b>TOTAL COSTO PROYECTO</b></p><p class="value"><b>$ 000</b></p>
+  <br>
+  <br>
+  <br>
+  <mat-accordion multi="true">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <b>CONTRIBUCIONES UDEA</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-table #tabla [dataSource]="contrUdeaDataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> RESOLUCIÓN RECTORAL 1189 de 1990 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+          </ng-container>
+    
+          <!-- Value Column -->
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+            <mat-cell *matCellDef="let item"> $ {{parseValue(item.value)}} </mat-cell>
+          </ng-container>
+    
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <b>CONTRIBUCIONES FACULTAD DE INGENIERIA</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-table #tabli [dataSource]="contrEngDataSource">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> RESOLUCIÓN DECANATO 059 de 2013 </mat-header-cell>
+            <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+          </ng-container>
+    
+          <!-- Value Column -->
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+            <mat-cell *matCellDef="let item"> $ {{parseValue(item.value)}} </mat-cell>
+          </ng-container>
+    
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+  <div class="buttons">
+    <button mat-raised-button color="primary">Analisis Financiero</button>
+    <button mat-raised-button color="primary">Descuentos</button>
+    <button mat-raised-button color="primary">Generar Reporte</button>
+    <button mat-raised-button color="primary">Guardar</button>
+  </div>
+</mat-card>

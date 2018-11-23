@@ -30,6 +30,14 @@ export const routes: Routes = [
     {
       path: 'actividades/editar/:code',
       component: ActivityDetailComponent
+    },
+    {
+      path: 'actividades/editar/:code/presupuesto',
+      component: BudgetComponent
+    },
+    {
+      path: 'actividades/editar/:code/presupuesto/:budgetItem',
+      component: FooterComponent
     }
    ]
   },

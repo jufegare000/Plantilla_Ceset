@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { formControlBinding } from '@angular/forms/src/directives/ng_model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activity-detail',
@@ -8,6 +9,10 @@ import { formControlBinding } from '@angular/forms/src/directives/ng_model';
   styleUrls: ['./activity-detail.component.css']
 })
 export class ActivityDetailComponent implements OnInit {
+
+  params: any;
+
+  private sub: any;
 
   generalForm: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -31,7 +36,7 @@ export class ActivityDetailComponent implements OnInit {
 
   budgetForm: FormGroup = new FormGroup({
     $key: new FormControl(null),
-    value: new FormControl('', [Validators.required])
+    value: new FormControl({value: '000', disabled: true}, [Validators.required])
   });
 
   cofinancingForm: FormGroup = new FormGroup({
@@ -58,13 +63,18 @@ export class ActivityDetailComponent implements OnInit {
     return '';
   }
 
+  goToBudget() {
+    this.router.navigate([`inicio/actividades/editar/${this.params['code']}/presupuesto`]);
+  }
+
   anyError() {
     return false;
   }
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => { this.params = params });
   }
 
 }
