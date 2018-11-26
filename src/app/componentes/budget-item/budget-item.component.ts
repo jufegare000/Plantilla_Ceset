@@ -84,7 +84,9 @@ export class BudgetItemComponent implements OnInit {
 
   openDialog() {
     let dialogRef = this.dialog.open(DialogBudgetItemComponent, {
-
+      data: {
+        page: this.params['budgetItem']
+      }
     });
   }
 
