@@ -1,0 +1,42 @@
+<form [formGroup]="this.form" class="normal-form">
+    <div class="controls-form">
+      <input type="hidden" formControlName="$key">
+      <mat-form-field>
+        <mat-select placeholder="Descripcion del Gasto" formControlName="description" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let idtype of idTypes" [value]="idtype">
+            {{idtype}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['role'].hasError('required')">{{getIdTypeErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput id="email" formControlName="email" placeholder="Correo Electrónico" required>
+        <mat-error *ngIf="form.controls['email'].hasError('required') || form.controls['email'].hasError('email')">{{getEmailErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput id="confirmEmail" formControlName="confirmEmail" placeholder="Confirmar Correo Electrónico" required>
+        <mat-error *ngIf="this.form.controls['confirmEmail'].hasError('email') || form.controls['confirmEmail'].hasError('required') || this.form.controls['confirmEmail'].hasError('match')">{{getConfirmEmailErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="pass" placeholder="Contraseña" type="password" required>
+        <mat-error *ngIf="form.controls['pass'].hasError('required')">{{getPassErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="confirmPass" placeholder="Confirmar Contraseña" (blur)="blur = true" [type]="hide ? 'password' : 'text'" required>
+        <mat-icon [color]="iconColor()" matSuffix class="pointer" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="form.controls['confirmPass'].hasError('required') || form.controls['confirmPass'].hasError('match')">{{getConfirmPassErr()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Rol" formControlName="role" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['role'].hasError('required')">{{getRoleErr()}}</mat-error>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Registrarse</button>
+    </div>
+  </form>

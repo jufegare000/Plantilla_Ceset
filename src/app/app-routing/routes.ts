@@ -8,6 +8,7 @@ import { NotificationCardComponent } from '../componentes/notification-card/noti
 import { ActivityListComponent } from '../componentes/activity-list/activity-list.component';
 import { ActivityDetailComponent } from '../componentes/activity-detail/activity-detail.component';
 import { BudgetComponent } from '../componentes/budget/budget.component';
+import { BudgetItemComponent } from '../componentes/budget-item/budget-item.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,7 @@ export const routes: Routes = [
     },
     {
       path: 'actividades/editar/:code/presupuesto/:budgetItem',
-      component: FooterComponent
+      component: BudgetItemComponent
     }
    ]
   },

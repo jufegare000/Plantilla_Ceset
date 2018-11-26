@@ -1,0 +1,38 @@
+<mat-form-field>
+  <mat-select placeholder="Favorite food" [formControl]="itemControl" [selectionChange]="showDataForm()" required>
+    <mat-option *ngFor="let item of budgetData" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="budgetItemDataSource">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Descripción del Gasto </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Value Column -->
+    <ng-container matColumnDef="quant">
+      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.quantity}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef> Valor Presupuestado </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.value}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cost">
+      <mat-header-cell *matHeaderCellDef> Costo Real </mat-header-cell>
+      <mat-cell *matCellDef="let item"> {{item.realCost}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="item" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>

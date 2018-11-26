@@ -52,6 +52,9 @@ import { NotificationCardComponent } from './componentes/notification-card/notif
 import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/activity-list/activity-list.component';
 import { ActivityDetailComponent } from './componentes/activity-detail/activity-detail.component';
 import { BudgetComponent } from './componentes/budget/budget.component';
+import { BudgetItemComponent } from './componentes/budget-item/budget-item.component';
+import { DialogConfirmarComponent } from './componentes/dialog-confirmar/dialog-confirmar.component';
+import { DialogBudgetItemComponent } from './componentes/dialog-budget-item/dialog-budget-item.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { BudgetComponent } from './componentes/budget/budget.component';
     NotificationCardComponent,
     ActivityListComponent,
     ActivityDetailComponent,
-    BudgetComponent
+    BudgetComponent,
+    BudgetItemComponent,
+    DialogBudgetItemComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +116,9 @@ import { BudgetComponent } from './componentes/budget/budget.component';
       provide: MatPaginatorIntl,
       useClass: MatPaginatorIntlSpanish
     }
+  ],
+  entryComponents: [
+    DialogBudgetItemComponent
   ],
 
   bootstrap: [AppComponent],
