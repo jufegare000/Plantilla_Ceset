@@ -1,0 +1,33 @@
+.button {
+    margin-left: 50%;
+    color: white;
+}
+
+@media(max-width: 750px) {
+    .button {
+        margin-left: 40%
+    }
+}
+
+@media(max-width: 650px) {
+    .button {
+        margin-left: 30%
+    }
+}
+
+@media(max-width: 550px) {
+    .button {
+        margin-left: 20%
+    }
+}
+
+.cell {
+    padding-top: 5px;
+    vertical-align: middle;
+    height: 50px;
+}
+
+.item:hover {
+    cursor: pointer;
+    background: #F5F5F5;
+}

@@ -23,11 +23,11 @@
         </mat-select>
         <mat-error *ngIf="form.controls['unity'].hasError('required')">Holiwis</mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field *ngIf="this.timeNeeded">
         <input matInput formControlName="time" placeholder="Tiempo" required>
         <mat-error *ngIf="form.controls['time'].hasError('required')"></mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field *ngIf="this.dedicationNeeded">
         <input matInput formControlName="dedication" class="right-align" placeholder="Dedicación (%)" type="number" required>
         <span matSuffix>%</span>
         <mat-error *ngIf="form.controls['dedication'].hasError('required')"></mat-error>
@@ -36,7 +36,20 @@
         <input matInput formControlName="unityValue" placeholder="Valor Unitario" type="number" required>
         <mat-error *ngIf="form.controls['unityValue'].hasError('required')"></mat-error>
       </mat-form-field>
+      <div *ngIf="this.fpNeeded">
+        <p class="label">Valor Total sin FP</p><p class="value">$ 00000000</p>
+        <p class="label">FP</p><p class="value">1,6</p>
+        <p class="label">Valor Unitario con FP</p><p class="value">$ 00000000</p>
+      </div>
+      <p class="label"><b>Valor Total<div class="inline" *ngIf="this.fpNeeded"> con FP</div></b></p><p class="value"><b>$ 000</b></p>
       <br><br>
-      <button mat-raised-button color="primary" type="submit">Registrarse</button>
+      <mat-form-field>
+        <textarea matInput formControlName="comment" placeholder="Observaciones" required></textarea>
+        <mat-error *ngIf="form.controls['comment'].hasError('required')"></mat-error>
+      </mat-form-field>
+      <br>
+      <button class="button" *ngIf="this.isCreate" (click)="createItem()" mat-raised-button color="primary">Crear</button>
+      <button class="button" *ngIf="this.isEdit" (click)="editItem()" mat-raised-button color="primary">Guardar</button>
+      <button class="button" *ngIf="this.isEdit" (click)="deleteItem()" mat-raised-button color="warn">Eliminar</button>
     </div>
   </form>

@@ -82,10 +82,12 @@ export class BudgetItemComponent implements OnInit {
     if(page !== this.params['budgetItem']) this.router.navigate([`inicio/actividades/editar/${this.params['code']}/presupuesto/${page}`]);
   }
 
-  openDialog() {
+  openDialog(type: string, row: any) {
     let dialogRef = this.dialog.open(DialogBudgetItemComponent, {
       data: {
-        page: this.params['budgetItem']
+        page: this.params['budgetItem'],
+        type: type,
+        row: row
       }
     });
   }

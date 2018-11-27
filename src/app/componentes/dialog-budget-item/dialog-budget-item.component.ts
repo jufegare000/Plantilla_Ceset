@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-dialog-budget-item',
@@ -16,29 +17,40 @@ export class DialogBudgetItemComponent implements OnInit {
     unity: new FormControl('', Validators.required),
     time: new FormControl('', Validators.required),
     dedication: new FormControl('', Validators.required),
-    unityValue: new FormControl('', Validators.required)
+    unityValue: new FormControl('', Validators.required),
+    comment: new FormControl('', Validators.required)
   });
 
   type: BudgetItem;
+  timeNeeded: boolean = false;
+  dedicationNeeded: boolean = false;
+  fpNeeded: boolean = false;
+  isEdit: boolean = false;
+  isCreate: boolean = false;
 
   sub: any;
   params: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA, ) public data: any) { }
 
   ngOnInit() {
     switch(this.data.page) {
       case 'personal':
         this.type = PERSONAL;
+        this.timeNeeded = true;
+        this.dedicationNeeded = true;
+        this.fpNeeded = true;
         break;
       case 'materiales':
         this.type = MATERIAL;
         break;
       case 'equipos':
         this.type = EQUIP;
+        this.timeNeeded = true;
         break;
       case 'transporte':
         this.type = TRANSPORT;
+        this.timeNeeded = true;
         break;
       case 'gastronomia':
         this.type = GASTRONOMY;
@@ -51,6 +63,7 @@ export class DialogBudgetItemComponent implements OnInit {
         break;
       case 'locaciones':
         this.type = LOCATION;
+        this.timeNeeded = true;
         break;
       case 'software':
         this.type = SOFTWARE;
@@ -62,6 +75,19 @@ export class DialogBudgetItemComponent implements OnInit {
         this.type = OTHER;
         break;
     };
+
+    this.isCreate = this.data.type === 'create' ? true : false;
+    this.isEdit = !this.isCreate;
+
+    console.log(this.data.row);
+  }
+
+  deleteItem() {
+    let dialogRef = this.dialog.open(FooterComponent, {
+      data: {
+        page: this.params['budgetItem']
+      }
+    });
   }
 
 }

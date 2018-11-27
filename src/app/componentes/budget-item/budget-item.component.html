@@ -27,12 +27,12 @@
 
     <ng-container matColumnDef="cost">
       <mat-header-cell *matHeaderCellDef> Costo Real </mat-header-cell>
-      <mat-cell *matCellDef="let item"> {{item.realCost}} </mat-cell>
+      <mat-cell class="cell" *matCellDef="let item"> {{item.realCost}} <button class="button" mat-mini-fab color="warn"><mat-icon>delete</mat-icon></button> </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row class="item" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row (click)="openDialog('edit', row)" (mouseenter)="this.mouseHovering = true" (mouseleave)="this.mouseHovering = false" class="item" *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
 
-<button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>
+<button mat-raised-button color="primary" (click)="openDialog('create')">Dialog</button>
