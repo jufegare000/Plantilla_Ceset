@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource, MatDialog} from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DialogFinancialAnalysisComponent } from '../dialog-financial-analysis/dialog-financial-analysis.component';
+import { DialogDiscountComponent } from '../dialog-discount/dialog-discount.component';
 
 @Component({
   selector: 'app-budget',
@@ -49,7 +51,7 @@ export class BudgetComponent implements OnInit {
     return `${startSub}'${midSub}.${endSub}`;
   }
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
   }
 
   goToBudgetItem(id: number) {
@@ -90,6 +92,14 @@ export class BudgetComponent implements OnInit {
         break;
     }
     this.router.navigate([`inicio/actividades/editar/${this.params['code']}/presupuesto/${page}`]);
+  }
+
+  showFinancialAnalysis() {
+    let dialogRef = this.dialog.open(DialogFinancialAnalysisComponent, {} );
+  }
+
+  showDiscount() {
+    let dialogRef = this.dialog.open(DialogDiscountComponent, {} );
   }
 
   ngOnInit() {

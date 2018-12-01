@@ -1,0 +1,64 @@
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+.right-align {
+    text-align: right;
+}
+
+* {
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.center {
+    text-align: center;
+}
+
+.little {
+    width: 80% !important;
+    margin-right: 10%;
+    float: right;
+    margin-bottom: 15px;
+}
+
+.label {
+  text-align: right;
+  max-width: 70%;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media(max-width: 565px) {
+  .label {
+    max-width: 50%;
+  }
+}
+
+@media(max-width: 400px) {
+  .label, .value {
+    font-size: 0.9em;
+  }
+}
+
+.value {
+  max-width: 110px;
+  display: inline-block;
+  color: gray;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.normal-form {
+  max-width: 500px;
+  padding-right: 10px;
+  overflow-y: scroll;
+  height: 500px;
+}
+
+.inline {
+  display: inline;
+}

@@ -1,0 +1,34 @@
+<form [formGroup]="this.form" class="normal-form">
+  <div class="controls-form">
+    <input type="hidden" formControlName="$key">
+    <mat-form-field class="little">
+      <input matInput formControlName="clients" placeholder="Número de Asistentes Propuesto/Clientes" type="number" required>
+      <mat-error *ngIf="form.controls['clients'].hasError('required')">Holiwis</mat-error>
+    </mat-form-field>
+    <div *ngIf="true">
+      <p class="label">Minimo Asistentes Experado</p><p class="value"> 00000000</p>
+      <p class="label">Valor Estimado Inscripción con Mayor Descuento</p><p class="value">1,6</p>
+      <p class="label">Punto de Equilibrio (# de Asistentes)</p><p class="value"> 00000000</p>
+    </div>
+    <mat-form-field class="little">
+      <input matInput formControlName="rate" placeholder="Tarifa Plena" type="number" required>
+      <mat-error *ngIf="form.controls['rate'].hasError('required')">Holiwis</mat-error>
+    </mat-form-field>
+    <p class="label"><b>PUNTO DE EQUILIBRIO</b></p><p class="value"><b>$ 000</b></p>
+    <br>
+    <br>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <br>
+    <br>
+    <div *ngIf="true">
+      <h3 class="center">VALOR DEFINITIVO DE LA PROPUESTA</h3>
+      <p class="label">Ingresos Brutos</p><p class="value">$ 00000000</p>
+      <p class="label">Contribución UdeA y Facultad de Ingeniería</p><p class="value">1,6</p>
+      <p class="label">Ingresos Netos</p><p class="value">$ 00000000</p>
+      <p class="label">Egresos</p><p class="value">$ 00000000</p>
+      <p class="label">Excedentes sin Imprevistos</p><p class="value">$ 00000000</p>
+    </div>
+  </div>
+</form>

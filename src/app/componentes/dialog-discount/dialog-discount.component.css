@@ -1,0 +1,43 @@
+.label {
+    text-align: right;
+    max-width: 70%;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.value {
+    max-width: 110px;
+    display: inline-block;
+    color: gray;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+* {
+    width: 85%;
+    margin: auto;
+}
+
+.table {
+    margin-top: 10px;
+}
+
+.mat-column-rateName {
+  min-width: 150px;
+}
+
+.mat-column-place {
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.mat-column-value,
+.mat-column-total {
+    min-width: 100px;
+}
+
+.buttons > * {
+    width: 49%;
+}

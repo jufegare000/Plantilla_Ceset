@@ -31,7 +31,7 @@ export class DialogBudgetItemComponent implements OnInit {
   sub: any;
   params: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA, ) public data: any) { }
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     switch(this.data.page) {
@@ -78,8 +78,6 @@ export class DialogBudgetItemComponent implements OnInit {
 
     this.isCreate = this.data.type === 'create' ? true : false;
     this.isEdit = !this.isCreate;
-
-    console.log(this.data.row);
   }
 
   deleteItem() {

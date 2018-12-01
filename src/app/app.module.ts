@@ -55,6 +55,8 @@ import { BudgetComponent } from './componentes/budget/budget.component';
 import { BudgetItemComponent } from './componentes/budget-item/budget-item.component';
 import { DialogConfirmarComponent } from './componentes/dialog-confirmar/dialog-confirmar.component';
 import { DialogBudgetItemComponent } from './componentes/dialog-budget-item/dialog-budget-item.component';
+import { DialogFinancialAnalysisComponent } from './componentes/dialog-financial-analysis/dialog-financial-analysis.component';
+import { DialogDiscountComponent } from './componentes/dialog-discount/dialog-discount.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { DialogBudgetItemComponent } from './componentes/dialog-budget-item/dial
     ActivityDetailComponent,
     BudgetComponent,
     BudgetItemComponent,
-    DialogBudgetItemComponent
+    DialogBudgetItemComponent,
+    DialogFinancialAnalysisComponent,
+    DialogDiscountComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +122,9 @@ import { DialogBudgetItemComponent } from './componentes/dialog-budget-item/dial
     }
   ],
   entryComponents: [
-    DialogBudgetItemComponent
+    DialogBudgetItemComponent,
+    DialogFinancialAnalysisComponent,
+    DialogDiscountComponent
   ],
 
   bootstrap: [AppComponent],
