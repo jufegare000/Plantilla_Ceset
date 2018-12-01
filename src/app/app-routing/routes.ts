@@ -9,6 +9,7 @@ import { ActivityListComponent } from '../componentes/activity-list/activity-lis
 import { ActivityDetailComponent } from '../componentes/activity-detail/activity-detail.component';
 import { BudgetComponent } from '../componentes/budget/budget.component';
 import { BudgetItemComponent } from '../componentes/budget-item/budget-item.component';
+import { RoleComponent } from '../componentes/role/role.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
     {
       path: 'actividades/editar/:code/presupuesto/:budgetItem',
       component: BudgetItemComponent
+    },
+    {
+      path: 'roles',
+      component: RoleComponent
     }
    ]
   },

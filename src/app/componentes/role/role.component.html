@@ -1,0 +1,12 @@
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
+      <mat-icon matSuffix>search</mat-icon>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
