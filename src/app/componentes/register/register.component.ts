@@ -28,62 +28,71 @@ export class RegisterComponent implements OnInit {
     role: new FormControl('', [Validators.required])
   });
 
-  hide: boolean = true;
-  blur: boolean = false;
-  submited: boolean = false;
+  hide = true;
+  blur = false;
+  submited = false;
 
   roles = ['Coordinador Académico', 'Coordinador Logístico', 'Coordinador Comercial'];
-  idTypes = ['Tarjeta de Identidad', 'Cedula de Ciudadanía', 'Cedula de Extranjería', 'Otro'];
 
   iconColor() {
     return this.form.controls['confirmPass'].invalid && this.blur ? 'warn' : '';
   }
 
-  anyError() : boolean {
+  anyError(): boolean {
     return this.form.invalid;
   }
 
-  getNameErr() : string {
+  getNameErr(): string {
     return this.form.controls['name'].hasError('required') ? 'Digita tus Nombres' : '';
   }
 
-  getLastNameErr() : string {
+  getLastNameErr(): string {
     return this.form.controls['lastName'].hasError('required') ? 'Digita tus Appelidos' : '';
   }
 
-  getIdErr() : string {
+  getIdErr(): string {
     return this.form.controls['id'].hasError('required') ? 'Digita el Número de tu Documento' : '';
   }
 
-  getIdTypeErr() : string {
+  getIdTypeErr(): string {
     return this.form.controls['idType'].hasError('required') ? 'Elige un Tipo de Documento' : '';
   }
 
-  getEmailErr() : string {
-    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electronicos no concuerdan' : '';
+  getEmailErr(): string {
+    const errMsg: string = this.form.controls['email'].hasError('required') ?
+    'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ?
+    'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ?
+    'Los Correos Electronicos no concuerdan' : '';
+    return errMsg;
   }
 
-  getConfirmEmailErr() : string {
-    return this.form.controls['confirmEmail'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['confirmEmail'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electrónicos no concuerdan' : '';
+  getConfirmEmailErr(): string {
+    const errMsg: string = this.form.controls['confirmEmail'].hasError('required') ?
+    'Digita tu Correo Electrónico' : this.form.controls['confirmEmail'].hasError('email') ?
+    'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ?
+    'Los Correos Electrónicos no concuerdan' : '';
+    return errMsg;
   }
 
-  getPassErr() : string {
+  getPassErr(): string {
     return this.form.controls['pass'].hasError('required') ? 'Digita tu Contraseña' : '';
   }
 
-  getConfirmPassErr() : string {
-    return this.form.controls['confirmPass'].hasError('required') ? 'Digita tu Contraseña' : this.form.controls['confirmPass'].hasError('match')  ? 'Las Contraseñas no concuerdan' : '';
+  getConfirmPassErr(): string {
+    return this.form.controls['confirmPass'].hasError('required') ?
+    'Digita tu Contraseña' : this.form.controls['confirmPass'].hasError('match')  ?
+    'Las Contraseñas no concuerdan' : '';
   }
 
-  getRoleErr() : string {
+  getRoleErr(): string {
     return this.form.controls['role'].hasError('required') ? 'Elige un rol' : '';
   }
 
   submit() {
     console.log(this.form.controls['id'].value);
-    this.rol.id = parseInt(this.form.controls['id'].value);
-    this.rol.estado = "En aprovacion";
-    this.rol.nombre = this.form.controls['name'].value + " " + this.form.controls['lastName'].value;
+    this.rol.id = parseInt(this.form.controls['id'].value, 10);
+    this.rol.estado = 'En aprovacion';
+    this.rol.nombre = this.form.controls['name'].value + ' ' + this.form.controls['lastName'].value;
 
     this.rolSs.create(this.rol);
   }
@@ -95,11 +104,18 @@ export class RegisterComponent implements OnInit {
     document.getElementById('confirmEmail').onpaste = (object) => {
       object.preventDefault();
       alert('Acción prohibida');
-    }
+    };
 
     document.getElementById('email').oncopy = (object) => {
       object.preventDefault();
       alert('Acción prohibida');
-    }
+    };
   }
 }
+
+export const idTypes: string[] = [
+  'Tarjeta de Identidad',
+  'Cedula de Ciudadanía',
+  'Cedula de Extranjería',
+  'Otro'
+];

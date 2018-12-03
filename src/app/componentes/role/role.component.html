@@ -1,12 +1,54 @@
-
 <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
-      <mat-icon matSuffix>search</mat-icon>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
+  <mat-form-field class="example-full-width">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Nombre">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Correo Electrónico">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Documento de Identidad">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Tipo de Documento" required>
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let idtype of idTypes" [value]="idtype">
+        {{idtype}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<mat-card>
+  <mat-card-title>Solicitud de Rol</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Rol" value="Holi" disabled>
     </mat-form-field>
-  </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn">Denegar</button>
+    <button mat-raised-button color="primary">Aceptar</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-list>
+  <h2 mat-subheader>Roles</h2>
+  <mat-list-item *ngFor="let folder of folders">
+    <h4 mat-line>{{folder.name}}</h4>
+    <p mat-line> {{folder.updated | date}} </p>
+    <button mat-mini-fab color="warn"><mat-icon matSuffix>delete</mat-icon></button>
+  </mat-list-item>
+  <mat-list-item>
+    <h4 mat-line> - </h4>
+    <button mat-mini-fab color="primary"><mat-icon matSuffix>add</mat-icon></button>
+  </mat-list-item>
+</mat-list>

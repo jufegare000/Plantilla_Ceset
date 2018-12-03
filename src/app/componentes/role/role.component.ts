@@ -20,9 +20,26 @@ export class RoleComponent implements OnInit {
 
   filteredOptions: Observable<string[]>;
 
+  folders = [
+    {
+      name: 'Coordinador Academico',
+      updated: new Date('1/1/16'),
+    },
+    {
+      name: 'Auxiliar Logistico',
+      updated: new Date('1/17/16'),
+    },
+    {
+      name: 'Otro',
+      updated: new Date('1/28/16'),
+    }
+  ];
+
+  idTypes = ['Tarjeta de Identidad', 'Cedula de Ciudadanía', 'Cedula de Extranjería', 'Otro'];
+
   ngOnInit() {
     let options: string[] = [];
-    for(let i = 0; i < this.dataSource.filteredData.length; i++) {
+    for (let i = 0; i < this.dataSource.filteredData.length; i++) {
       options[i] = this.dataSource.filteredData[i].name;
     }
     this.filteredOptions = Observable.of(options);
@@ -31,10 +48,11 @@ export class RoleComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
     let options: string[] = [];
-    for(let i = 0; i < this.dataSource.filteredData.length; i++) {
+    for (let i = 0; i < this.dataSource.filteredData.length; i++) {
       options[i] = this.dataSource.filteredData[i].name;
     }
-    this.filteredOptions = (typeof options !== 'undefined' && options.length > 0) ? Observable.of(options) : Observable.of(['Usuario no encontrado...']);
+    this.filteredOptions = (typeof options !== 'undefined' && options.length > 0) ?
+    Observable.of(options) : Observable.of(['Usuario no encontrado...']);
   }
 
   constructor(private router: Router) {
