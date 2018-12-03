@@ -1,54 +1,87 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
-    <mat-icon matSuffix>search</mat-icon>
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of this.filteredOptions | async" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Nombre">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Correo Electrónico">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Documento de Identidad">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Tipo de Documento" required>
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let idtype of idTypes" [value]="idtype">
-        {{idtype}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
-
-<mat-card>
-  <mat-card-title>Solicitud de Rol</mat-card-title>
-  <mat-card-content>
+<mat-card class="container">
+  <form class="form" [formGroup]="this.form">
+    <input type="hidden" formControlName="$key">
     <mat-form-field>
-      <input matInput placeholder="Rol" value="Holi" disabled>
+      <input matInput formControlName="search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
+      <mat-icon matSuffix class="pointer">search</mat-icon>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of this.filteredOptions | async" (click)="chargeView(option, item.value)" #item [value]="option.name !== 'Usuario no Encontrado...' ? option.name + ' ' + option.lastName + '.' : 'Crear Usuario'">
+          {{ option.name !== 'Usuario no Encontrado...' ? option.name + ' ' + option.lastName + '.' : option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="warn">Denegar</button>
-    <button mat-raised-button color="primary">Aceptar</button>
-  </mat-card-actions>
-</mat-card>
+    <mat-card class="form" *ngIf="this.userSelected">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Nombres">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="lastName" placeholder="Apellidos">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Correo Electrónico">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="idType" placeholder="Tipo de Documento" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let idtype of idTypes" [value]="idtype">
+            {{idtype}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="id" placeholder="Documento de Identidad">
+      </mat-form-field>
+    </mat-card>
+  </form>
+  <br><br>
 
-<mat-list>
-  <h2 mat-subheader>Roles</h2>
-  <mat-list-item *ngFor="let folder of folders">
-    <h4 mat-line>{{folder.name}}</h4>
-    <p mat-line> {{folder.updated | date}} </p>
-    <button mat-mini-fab color="warn"><mat-icon matSuffix>delete</mat-icon></button>
-  </mat-list-item>
-  <mat-list-item>
-    <h4 mat-line> - </h4>
-    <button mat-mini-fab color="primary"><mat-icon matSuffix>add</mat-icon></button>
-  </mat-list-item>
-</mat-list>
+  <div class="content" *ngIf="this.userSelected">
+    <div class="request-container" *ngIf="this.requestedRole">
+      <mat-card class="request">
+        <mat-card-header>
+          <mat-card-title>Solicitud de Rol</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <mat-form-field class="input">
+            <input matInput placeholder="Rol" [value]="this.user.roleRequest.role.name" disabled>
+          </mat-form-field>
+        </mat-card-content>
+        <div class="buttons-full">
+          <button mat-raised-button color="warn" (click)="denyRequest()">Denegar</button>
+          <button mat-raised-button color="primary" (click)="acceptRequest()">Aceptar</button>
+        </div>
+      </mat-card>
+      <br><br>
+    </div>
+    <mat-card class="list">
+      <mat-card-header>
+        <mat-card-title>
+          Roles de {{ this.user.name + ' ' + this.user.lastName + '.' }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-list>
+        <mat-list-item *ngFor="let role of roles">
+          <h4 mat-line>{{role.name}}</h4>
+          <button mat-mini-fab color="warn" (click)="deleteRole(role)"><mat-icon matSuffix>delete</mat-icon></button>
+        </mat-list-item>
+        <br>
+        <mat-divider></mat-divider>
+        <mat-list-item style="height: 100px">
+          <h4 mat-line></h4>
+          <button mat-fab color="primary" (click)="addRole()"><mat-icon matSuffix>add</mat-icon></button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <div class="buttons-full">
+      <button mat-raised-button color="warn" (click)="openDialog()">Eliminar Usuario</button>
+      <button mat-raised-button color="primary" (click)="saveUser()">Guardar</button>
+    </div>
+  </div>
+  <div class="create" *ngIf="!this.userSelected">
+    <button class="full" mat-raised-button color="primary" (click)="goToRegister()">Crear Usuario</button>
+  </div>
+</mat-card>

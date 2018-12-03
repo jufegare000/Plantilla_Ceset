@@ -58,6 +58,7 @@ import { DialogBudgetItemComponent } from './componentes/dialog-budget-item/dial
 import { DialogFinancialAnalysisComponent } from './componentes/dialog-financial-analysis/dialog-financial-analysis.component';
 import { DialogDiscountComponent } from './componentes/dialog-discount/dialog-discount.component';
 import { RoleComponent } from './componentes/role/role.component';
+import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { RoleComponent } from './componentes/role/role.component';
     DialogBudgetItemComponent,
     DialogFinancialAnalysisComponent,
     DialogDiscountComponent,
-    RoleComponent
+    RoleComponent,
+    DialogConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +128,8 @@ import { RoleComponent } from './componentes/role/role.component';
   entryComponents: [
     DialogBudgetItemComponent,
     DialogFinancialAnalysisComponent,
-    DialogDiscountComponent
+    DialogDiscountComponent,
+    DialogConfirmComponent
   ],
 
   bootstrap: [AppComponent],

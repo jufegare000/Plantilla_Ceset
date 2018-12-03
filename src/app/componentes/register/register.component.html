@@ -25,7 +25,7 @@
               {{idtype}}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="form.controls['role'].hasError('required')">{{getIdTypeErr()}}</mat-error>
+          <mat-error *ngIf="form.controls['idType'].hasError('required')">{{getIdTypeErr()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput id="email" formControlName="email" placeholder="Correo Electrónico" required>
@@ -48,7 +48,7 @@
           <mat-select placeholder="Rol" formControlName="role" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let role of roles" [value]="role">
-              {{role}}
+              {{role.name}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="form.controls['role'].hasError('required')">{{getRoleErr()}}</mat-error>

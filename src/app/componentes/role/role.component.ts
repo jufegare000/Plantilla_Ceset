@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { UserData, createNewUser } from '../activity-list/activity-list.component';
-import { Router } from '@angular/router';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User, createNewUser, ID_TYPES } from '../../modelos/user';
+import { Role, ROLES } from '../../modelos/role';
+import { DialogBudgetItemComponent } from '../dialog-budget-item/dialog-budget-item.component';
+import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'app-role',
@@ -14,50 +17,100 @@ import { Router } from '@angular/router';
 })
 export class RoleComponent implements OnInit {
 
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    search: new FormControl(),
+    name: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    id: new FormControl('', [Validators.required]),
+    idType: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email])
+  });
+
   myControl: FormControl = new FormControl();
 
-  dataSource: MatTableDataSource<UserData>;
+  dataSource: MatTableDataSource<User>;
 
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<User[]>;
+  optionId: number[] = [];
 
-  folders = [
-    {
-      name: 'Coordinador Academico',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Auxiliar Logistico',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Otro',
-      updated: new Date('1/28/16'),
-    }
-  ];
+  userSelected: boolean;
+  requestedRole: boolean;
 
-  idTypes = ['Tarjeta de Identidad', 'Cedula de Ciudadanía', 'Cedula de Extranjería', 'Otro'];
+  user: User;
+
+  roles: Role[];
+
+  idTypes = ID_TYPES;
 
   ngOnInit() {
-    let options: string[] = [];
+    let options: User[] = [];
     for (let i = 0; i < this.dataSource.filteredData.length; i++) {
-      options[i] = this.dataSource.filteredData[i].name;
+      options[i] = this.dataSource.filteredData[i];
     }
     this.filteredOptions = Observable.of(options);
+    this.userSelected = false;
+    this.requestedRole = false;
+  }
+
+  chargeView(option: User, value?: string) {
+    if(value !== 'Crear Usuario') {
+      this.userSelected = true;
+      this.user = option;
+      this.roles = option.role;
+      this.form.controls['name'].setValue(option.name);
+      this.form.controls['lastName'].setValue(option.lastName);
+      this.form.controls['id'].setValue(option.id);
+      this.form.controls['email'].setValue(option.email);
+      this.form.controls['idType'].setValue(option.idType);
+      this.requestedRole = option.roleRequest != null;
+      console.log(this.user.roleRequest);
+    } else {
+      this.userSelected = false;
+      this.requestedRole = false;
+    }
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(DialogConfirmComponent, {
+      data: {}
+    });
+  }
+
+  acceptRequest() {
+    this.roles.push(this.user.roleRequest.role);
+    this.requestedRole = false;
+  }
+
+  denyRequest() {
+    this.requestedRole = false;
+  }
+
+  deleteRole(role: Role) {
+    for(let i = 0; i < this.roles.length; i++) {
+      this.roles[i] === role ? this.roles.splice(i, 1) : null;
+    }
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue;
-    let options: string[] = [];
+    const datas = this.dataSource.filter;
+    console.log(this.dataSource.filteredData[0]);
+    let options: User[] = [];
     for (let i = 0; i < this.dataSource.filteredData.length; i++) {
-      options[i] = this.dataSource.filteredData[i].name;
+      options[i] = this.dataSource.filteredData[i];
     }
     this.filteredOptions = (typeof options !== 'undefined' && options.length > 0) ?
-    Observable.of(options) : Observable.of(['Usuario no encontrado...']);
+    Observable.of(options) : Observable.of([createNewUser(999999999999, 'Usuario no Encontrado...')]);
   }
 
-  constructor(private router: Router) {
+  goToRegister() {
+    this.router.navigate(['registro']);
+  }
+
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
     // Create 100 users
-    const users: UserData[] = [];
+    const users: User[] = [];
     for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
 
     // Assign the data to the data source for the table to render

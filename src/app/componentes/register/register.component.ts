@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { ValidateMatch } from '../../validators/matchValidator';
 import { RolService } from '../../servicios/rol.service';
 import { Rol } from '../../modelos/rol';
+import { ROLES } from '../../modelos/role';
+import { ID_TYPES } from '../../modelos/user';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +34,8 @@ export class RegisterComponent implements OnInit {
   blur = false;
   submited = false;
 
-  roles = ['Coordinador Académico', 'Coordinador Logístico', 'Coordinador Comercial'];
+  roles = ROLES;
+  idTypes = ID_TYPES;
 
   iconColor() {
     return this.form.controls['confirmPass'].invalid && this.blur ? 'warn' : '';

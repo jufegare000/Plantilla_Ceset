@@ -10,6 +10,7 @@ import { ActivityDetailComponent } from '../componentes/activity-detail/activity
 import { BudgetComponent } from '../componentes/budget/budget.component';
 import { BudgetItemComponent } from '../componentes/budget-item/budget-item.component';
 import { RoleComponent } from '../componentes/role/role.component';
+import { DialogConfirmComponent } from '../componentes/dialog-confirm/dialog-confirm.component';
 
 export const routes: Routes = [
   {
@@ -63,7 +64,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: BudgetComponent
+    component: DialogConfirmComponent
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
  
