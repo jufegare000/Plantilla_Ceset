@@ -32,13 +32,6 @@ export class InicioComponent implements OnInit {
     }, error =>{
       this.error = error;
     });
-    this.rolSs.getById(1)
-    .subscribe(rol => {
-      console.log('Funcionó!!!');
-      this.rol = rol;
-    }, error => {
-      this.error = error;
-    });
   }
 
   ngOnInit() {
