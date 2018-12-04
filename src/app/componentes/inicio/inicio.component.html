@@ -32,10 +32,10 @@
             </mat-nav-list>
             <button mat-icon-button style="bottom: 15px; position: absolute; right: 15px;"><mat-icon>settings</mat-icon></button>
         </mat-sidenav>
-        <mat-sidenav-content (click)="toggleDrawer(drawer)" fullscreen>
+        <mat-sidenav-content (click)="toggleDrawer(drawer)" id="content">
             <!-- Body -->
                 <router-outlet></router-outlet>
-                <app-footer></app-footer>
+                <app-footer [ngClass]="{ 'footer': !scrollShowed }"></app-footer>
             <!---->
         </mat-sidenav-content>
     </mat-sidenav-container>

@@ -31,7 +31,7 @@ export function createNewUser(id: number, name?: string): User {
   };
 }
 
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
+export const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
   'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
   'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 

@@ -18,12 +18,16 @@ export class InicioComponent implements OnInit {
   hideCohortList: boolean;
   hideOther: boolean;
 
+  scrollShowed: boolean;
+
   private _mobileQueryListener: () => void;
 
   constructor(public loginService: LoginService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private rolSs: RolService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    console.log(this.mobileQuery.matches);
 
     this.rolSs.getAll()
     .subscribe(listaRoles => {
@@ -38,6 +42,14 @@ export class InicioComponent implements OnInit {
     this.hideActivityList = true;
     this.hideCohortList = true;
     this.hideOther = true;
+  }
+
+  ngDoCheck() {
+    this.scrollShowed = document.getElementById('content').clientHeight < document.getElementById('content').scrollHeight;
+  }
+
+  ngAfterViewInit() {
+
   }
 
   array = [,,,,,,,,,,,,,,,,,,,,,,];
