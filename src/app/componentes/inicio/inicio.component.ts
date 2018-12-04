@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output } from '@angular/core';
 import { RolService } from '../../servicios/rol.service';
 import { Rol } from '../../modelos/rol';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -36,6 +36,12 @@ export class InicioComponent implements OnInit {
     }, error =>{
       this.error = error;
     });
+
+    this.rolSs.create(new Rol());
+  }
+
+  getActivity(event: any) {
+    console.log(event, 'Holiwis');
   }
 
   ngOnInit() {

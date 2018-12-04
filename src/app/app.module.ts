@@ -59,6 +59,7 @@ import { DialogFinancialAnalysisComponent } from './componentes/dialog-financial
 import { DialogDiscountComponent } from './componentes/dialog-discount/dialog-discount.component';
 import { RoleComponent } from './componentes/role/role.component';
 import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-confirm.component';
+import { ActivityService } from './servicios/activity.service';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-conf
     AuthGuard,
     JwtService,
     RolService,
+    ActivityService,
     {
       provide: MatPaginatorIntl,
       useClass: MatPaginatorIntlSpanish

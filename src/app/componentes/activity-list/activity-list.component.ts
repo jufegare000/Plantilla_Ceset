@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild , Injectable} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource, MatPaginatorIntl} from '@angular/material';
+import { Component, OnInit, ViewChild , Injectable, Output, EventEmitter} from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorIntl } from '@angular/material';
 import { Router } from '@angular/router';
+import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
+import { ActivityService } from '../../servicios/activity.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -8,19 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
-  displayedColumns = ['code', 'name', 'attendant'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns = ['id', 'name', 'coordinatorName'];
+  dataSource: MatTableDataSource<AcademicActivity>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private activityService: ActivityService) {
     // Create 100 users
-    const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
+    const activities: AcademicActivity[] = [];
+    for (let i = 1; i <= 100; i++) { activities.push(createNewActivity(i)); }
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(activities);
   }
 
   /**
@@ -32,8 +34,9 @@ export class ActivityListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  clicked(row) {
-    this.router.navigate(['/inicio/actividades/editar/' + row.code]);
+  clicked(row: AcademicActivity) {
+    this.activityService.activity = row;
+    this.router.navigate(['/inicio/actividades/editar/' + row.id]);
   }
 
   applyFilter(filterValue: string) {
@@ -47,35 +50,15 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
-
 }
 
-/** Builds and returns a new User. */
-export function createNewUser(id: number): UserData {
-  const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    code: id.toString(),
-    name: name,
-    attendant: Math.round(Math.random() * 100).toString()
-  };
-}
-
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-export interface UserData {
+/*export interface UserData {
   code: string;
   name: string;
   attendant: string;
-}
+}*/
 
 @Injectable()
 export class MatPaginatorIntlSpanish extends MatPaginatorIntl {

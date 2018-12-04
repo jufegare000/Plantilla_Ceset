@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { formControlBinding } from '@angular/forms/src/directives/ng_model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AcademicActivity } from '../../modelos/academicActivity';
+import { ActivityService } from '../../servicios/activity.service';
 
 @Component({
   selector: 'app-activity-detail',
@@ -9,6 +11,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./activity-detail.component.css']
 })
 export class ActivityDetailComponent implements OnInit {
+  currentActivity: AcademicActivity;
+  createView: boolean;
 
   params: any;
 
@@ -71,10 +75,26 @@ export class ActivityDetailComponent implements OnInit {
     return false;
   }
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private activityService: ActivityService) { }
 
   ngOnInit() {
+    let activity = this.activityService.activity;
+    this.currentActivity = activity;
     this.sub = this.route.params.subscribe(params => { this.params = params });
+
+    this.createView = this.router.url.includes('crear');
+    
+    if(!this.createView) {
+      let form: FormGroup = this.generalForm;
+      form.controls['name'].setValue(activity.name);
+      form.controls['type'].setValue(activity.type);
+      form.controls['dependency'].setValue(activity.dependency);
+      form.controls['resGroup'].setValue(activity.investigationGroup || '');
+      form.controls['coordinator'].setValue(activity.coordinatorName);
+      form.controls['phone'].setValue(activity.coordinatorPhone);
+      form.controls['email'].setValue(activity.coordinatorEmail);
+      form.controls['duration'].setValue(activity.duration);
+    }
   }
 
 }

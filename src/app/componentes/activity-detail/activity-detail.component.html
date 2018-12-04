@@ -92,7 +92,7 @@
       <form [formGroup]="this.budgetForm">
         <input type="hidden" formControlName="$key">
         <mat-form-field class="pointer" (click)="goToBudget()">
-          <input matInput class="pointer" formControlName="value" placeholder="Valor" disabled required>
+          <input matInput class="pointer" formControlName="value" placeholder="Valor" required>
           <mat-icon class="disabled pointer" matSuffix>monetization_on</mat-icon>
           <mat-error *ngIf="contractForm.controls['type'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
@@ -160,6 +160,10 @@
 
   <br><br>
 
-  <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear Actividad</button>
+  <button class="button" mat-raised-button *ngIf="this.createView" [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear Actividad</button>
+  <div class="button" *ngIf="!this.createView">
+    <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="warn" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Eliminar</button>
+    <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Guardar</button>
+  </div>
 
 </mat-card>

@@ -33,11 +33,16 @@ export function createNewActivity(id: number, name?: string): AcademicActivity {
   return {
     id: id,
     name: auxName,
-    user: user
-    idType: idType,
-    email: email,
-    role: role,
-    roleRequest: roleRequest
+    user: user,
+    type: type,
+    dependency: dependency,
+    coordinatorName: coordinatorName,
+    coordinatorEmail: coordinatorEmail,
+    coordinatorPhone: coordinatorPhone,
+    duration: duration,
+    contract: contract,
+    creationDate: creationDate,
+    state: state
   };
 }
 

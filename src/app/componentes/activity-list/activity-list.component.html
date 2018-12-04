@@ -21,9 +21,9 @@
     <mat-table [dataSource]="dataSource" matSort>
 
       <!-- Code Column -->
-      <ng-container matColumnDef="code" style="max-width: 50px">
+      <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
@@ -33,9 +33,9 @@
       </ng-container>
 
       <!-- Attendant Column -->
-      <ng-container matColumnDef="attendant">
+      <ng-container matColumnDef="coordinatorName">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Encargado </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.attendant}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.coordinatorName}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
