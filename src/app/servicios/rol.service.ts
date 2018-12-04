@@ -9,7 +9,7 @@ export class RolService {
   constructor(private restangular: Restangular) { }
 
   getAll(): Observable<Rol[]>{
-    return this.restangular.all('usuario').getList();
+    return this.restangular.all('usuarios').getList();
   }
 
   getById(id: number): Observable<Rol> {

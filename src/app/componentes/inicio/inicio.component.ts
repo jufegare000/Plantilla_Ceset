@@ -24,10 +24,10 @@ export class InicioComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    
+
     this.rolSs.getAll()
     .subscribe(listaRoles => {
-      console.log("Retornó");
+      console.log(listaRoles);
       this.roles = listaRoles;
     }, error =>{
       this.error = error;
