@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="container">
   <form class="controls-form" [formGroup]="this.generalForm">
     <input type="hidden" formControlName="$key">
     <mat-form-field>
@@ -45,7 +45,7 @@
     </mat-form-field>
     <br><br>
   </form>
-  
+
   <mat-accordion multi="true">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -68,13 +68,13 @@
           <mat-error *ngIf="contractForm.controls['entity'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="startDate" [matDatepicker]="startDate" placeholder="Fecha de Inicialización">
+          <input matInput formControlName="startDate" (click)="startDate.open()" [matDatepicker]="startDate" placeholder="Fecha de Inicialización">
           <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
           <mat-datepicker #startDate></mat-datepicker>
           <mat-error *ngIf="contractForm.controls['startDate'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="endDate" [matDatepicker]="endDate" placeholder="Fecha de Finalización">
+          <input matInput formControlName="endDate" (click)="endDate.open()" [matDatepicker]="endDate" placeholder="Fecha de Finalización">
           <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
           <mat-datepicker #endDate></mat-datepicker>
           <mat-error *ngIf="contractForm.controls['endDate'].hasError('required')">{{getNameErr()}}</mat-error>
@@ -97,7 +97,7 @@
           <mat-error *ngIf="contractForm.controls['type'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
       </form>
-      
+
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -160,6 +160,6 @@
 
   <br><br>
 
-  <button mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear Actividad</button>
+  <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear Actividad</button>
 
 </mat-card>

@@ -1,18 +1,6 @@
 .button {
-    margin-left: 50%;
+    margin-left: 20%;
     color: white;
-}
-
-@media(max-width: 750px) {
-    .button {
-        margin-left: 40%
-    }
-}
-
-@media(max-width: 650px) {
-    .button {
-        margin-left: 30%
-    }
 }
 
 @media(max-width: 550px) {
@@ -30,4 +18,23 @@
 .item:hover {
     cursor: pointer;
     background: #F5F5F5;
+}
+
+.container {
+  width: 500px;
+  margin: 25px auto;
+}
+
+.select > * {
+  width: 100%;
+}
+
+.table {
+  padding: 10px 20px 80px 20px;
+}
+
+.add-button {
+  right: 0;
+  margin: 10px 50px 0 0;
+  position: absolute;
 }

@@ -11,12 +11,21 @@ import { BudgetComponent } from '../componentes/budget/budget.component';
 import { BudgetItemComponent } from '../componentes/budget-item/budget-item.component';
 import { RoleComponent } from '../componentes/role/role.component';
 import { DialogConfirmComponent } from '../componentes/dialog-confirm/dialog-confirm.component';
+import { Component } from '@angular/core';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegisterComponent
   },
   {
    path: 'inicio',
@@ -43,6 +52,26 @@ export const routes: Routes = [
       component: BudgetItemComponent
     },
     {
+      path: 'cohortes',
+      component: ActivityListComponent
+    },
+    {
+      path: 'cohortes/crear',
+      component: ActivityDetailComponent
+    },
+    {
+      path: 'cohortes/editar/:code',
+      component: ActivityDetailComponent
+    },
+    {
+      path: 'cohortes/editar/:code/presupuesto/grupo/:group',
+      component: BudgetComponent
+    },
+    {
+      path: 'cohortes/editar/:code/presupuesto/:budgetItem/grupo/:group',
+      component: BudgetItemComponent
+    },
+    {
       path: 'roles',
       component: RoleComponent
     }
@@ -55,17 +84,9 @@ export const routes: Routes = [
     data: { preload: true }
   },
   {
-    path: 'registro',
-    component: RegisterComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: 'dev',
     component: DialogConfirmComponent
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
- 
+
 ];

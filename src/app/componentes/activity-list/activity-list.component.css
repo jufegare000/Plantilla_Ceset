@@ -1,8 +1,21 @@
-.example-header, .example-container {
-    margin: 1rem;
-    max-width: 80%;
-    min-width: 80%;
-    display: inline-block;
+.search > *:not(.date) {
+  width: 100%;
+}
+
+.container {
+  width: 600px;
+  margin: 15px auto;
+}
+
+.date {
+  width: 50%;
+  margin: -1px;
+  padding: 0;
+}
+
+.table {
+  margin: 20px 0;
+  padding: 10px 25px 70px 25px;
 }
 
 .example-header {
@@ -17,8 +30,16 @@
 }
 
 .button {
-    right: 0;
-    display: inline-block;
+    right: 25px;
+    margin-top: 5px;
+    position: absolute;
+}
+
+.paginator {
+  margin-top: 5px;
+  left: 0;
+  position: absolute;
+  margin-left: 25px;
 }
 
 /**

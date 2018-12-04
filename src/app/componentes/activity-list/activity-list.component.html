@@ -1,56 +1,50 @@
-<mat-grid-list cols="3">
-  <mat-grid-tile></mat-grid-tile>
-  <mat-grid-tile rowspan="1">
-<div class="example-header">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="start" placeholder="Fecha Creación Inicial:">
-    <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-    <mat-datepicker #start></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="finish" placeholder="Fecha Creación Final:">
-    <mat-datepicker-toggle matSuffix [for]="finish"></mat-datepicker-toggle>
-    <mat-datepicker #finish></mat-datepicker>
-  </mat-form-field>
-</div>
+<mat-card class="container">
+  <div class="search">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="date">
+      <input matInput (click)="start.open()" [matDatepicker]="start" placeholder="Fecha Creación Inicial:">
+      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+      <mat-datepicker #start></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="date">
+      <input matInput (click)="finish.open()" [matDatepicker]="finish" placeholder="Fecha Creación Final:">
+      <mat-datepicker-toggle matSuffix [for]="finish"></mat-datepicker-toggle>
+      <mat-datepicker #finish></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-<div class="example-container mat-elevation-z8">
+  <mat-card class="table">
 
-  <mat-table [dataSource]="dataSource" matSort>
+    <mat-table [dataSource]="dataSource" matSort>
 
-    <!-- Code Column -->
-    <ng-container matColumnDef="code" style="max-width: 50px">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
-    </ng-container>
+      <!-- Code Column -->
+      <ng-container matColumnDef="code" style="max-width: 50px">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
 
-    <!-- Attendant Column -->
-    <ng-container matColumnDef="attendant">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Encargado </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.attendant}} </mat-cell>
-    </ng-container>
+      <!-- Attendant Column -->
+      <ng-container matColumnDef="attendant">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Encargado </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.attendant}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="item" (click)="clicked(row)">
-    </mat-row>
-  </mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="item" (click)="clicked(row)">
+      </mat-row>
+    </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</div>
+    <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <button mat-fab color="primary" (click)="createActivity()" class="button"> <mat-icon>add</mat-icon> </button>
+  </mat-card>
 
-<button mat-fab color="primary" (click)="createActivity()" class="button"> <mat-icon>add</mat-icon> </button>
-</mat-grid-tile>
-<mat-grid-tile></mat-grid-tile>
-</mat-grid-list>
-
-<router-outlet></router-outlet>
+</mat-card>

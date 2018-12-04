@@ -4,15 +4,21 @@
     min-width: 350px;
   }
 
-  .container {
-    min-width: 450px;
+  .table {
+    padding: 10px 25px;
   }
-  
+
+  .container {
+    max-width: 500px;
+    min-width: 450px;
+    margin: 25px auto;
+  }
+
   .example-header {
     min-height: 64px;
     padding: 8px 24px 0;
   }
-  
+
   .mat-form-field {
     font-size: 14px;
     width: 100%;
