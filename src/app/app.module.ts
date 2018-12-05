@@ -60,6 +60,7 @@ import { DialogDiscountComponent } from './componentes/dialog-discount/dialog-di
 import { RoleComponent } from './componentes/role/role.component';
 import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-confirm.component';
 import { ActivityService } from './servicios/activity.service';
+import { PersonService } from './servicios/person.service';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { ActivityService } from './servicios/activity.service';
     JwtService,
     RolService,
     ActivityService,
+    PersonService,
     {
       provide: MatPaginatorIntl,
       useClass: MatPaginatorIntlSpanish

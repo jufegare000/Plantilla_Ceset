@@ -16,7 +16,12 @@
 }
 
 .full, .buttons-full {
-    width: 100%;
+    width: 98.5%;
+    margin-bottom: 1%;
+}
+
+.create > *:not(.full) {
+    width: 49%;
 }
 
 .buttons-full {

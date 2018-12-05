@@ -1,4 +1,5 @@
 import { ROLES, Role, RoleRequest } from './role';
+import { Person, createPerson } from './person';
 
 export interface User {
     name: string;
@@ -8,6 +9,24 @@ export interface User {
     email: string;
     role?: Role[];
     roleRequest?: RoleRequest;
+}
+
+export interface Userer {
+  idUser: number;
+  nameUser: string;
+  password: string;
+  dateCreation: string;
+  state: string;
+}
+
+export function createNewUserer(id: number) {
+  return {
+    idUser: 123,
+    nameUser: 'Pepito Perez',
+    password: 'PepitoPerez123',
+    dateCreation: new Date().toDateString,
+    state: 'Yo no sé o.O'
+  }
 }
 
 export function createNewUser(id: number, name?: string): User {

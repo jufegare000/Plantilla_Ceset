@@ -68,6 +68,7 @@ export class RoleComponent implements OnInit {
     } else {
       this.userSelected = false;
       this.requestedRole = false;
+      this.goToRegister();
     }
   }
 
@@ -101,11 +102,20 @@ export class RoleComponent implements OnInit {
       options[i] = this.dataSource.filteredData[i];
     }
     this.filteredOptions = (typeof options !== 'undefined' && options.length > 0) ?
-    Observable.of(options) : Observable.of([createNewUser(999999999999, 'Usuario no Encontrado...')]);
+    Observable.of(options) : Observable.of([createNewUser(999999999999, 'Crear Usuario...')]);
   }
 
   goToRegister() {
     this.router.navigate(['registro']);
+  }
+
+  goToCreateRole() {
+    console.log();
+  }
+
+  clearData() {
+    this.form.controls['search'].setValue('');
+    this.userSelected = false;
   }
 
   constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {

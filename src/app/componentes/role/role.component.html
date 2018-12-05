@@ -2,11 +2,12 @@
   <form class="form" [formGroup]="this.form">
     <input type="hidden" formControlName="$key">
     <mat-form-field>
-      <input matInput formControlName="search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar" [matAutocomplete]="auto">
-      <mat-icon matSuffix class="pointer">search</mat-icon>
+      <input matInput formControlName="search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario" [matAutocomplete]="auto">
+      <mat-icon *ngIf="!this.userSelected" matSuffix class="pointer">search</mat-icon>
+      <mat-icon *ngIf="this.userSelected" (click)="clearData()" matSuffix class="pointer">clear</mat-icon>
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of this.filteredOptions | async" (click)="chargeView(option, item.value)" #item [value]="option.name !== 'Usuario no Encontrado...' ? option.name + ' ' + option.lastName + '.' : 'Crear Usuario'">
-          {{ option.name !== 'Usuario no Encontrado...' ? option.name + ' ' + option.lastName + '.' : option.name }}
+        <mat-option *ngFor="let option of this.filteredOptions | async" (click)="chargeView(option, item.value)" #item [value]="option.name !== 'Crear Usuario...' ? option.name + ' ' + option.lastName + '.' : 'Crear Usuario'">
+          {{ option.name !== 'Crear Usuario...' ? option.name + ' ' + option.lastName + '.' : option.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -33,7 +34,9 @@
       </mat-form-field>
     </mat-card>
   </form>
-  <br><br>
+  <div *ngIf="this.userSelected">
+    <br><br>
+  </div>
 
   <div class="content" *ngIf="this.userSelected">
     <div class="request-container" *ngIf="this.requestedRole">
@@ -82,6 +85,8 @@
     </div>
   </div>
   <div class="create" *ngIf="!this.userSelected">
-    <button class="full" mat-raised-button color="primary" (click)="goToRegister()">Crear Usuario</button>
+    <button mat-raised-button class="full" color="primary" (click)="goToRoleView()">Ver Lista de Roles</button>
+    <button mat-raised-button color="primary" (click)="goToRegister()">Crear Usuario</button>
+    <button mat-raised-button color="primary" (click)="goToCreateRole()">Crear Rol</button>
   </div>
 </mat-card>

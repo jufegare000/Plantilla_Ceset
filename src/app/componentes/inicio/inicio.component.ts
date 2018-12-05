@@ -19,6 +19,10 @@ export class InicioComponent implements OnInit {
   hideCohortList: boolean;
   hideOther: boolean;
 
+  closedNotification: boolean;
+  openedNotification: boolean;
+  toggledNotification: boolean;
+
   scrollShowed: boolean;
 
   private _mobileQueryListener: () => void;
@@ -29,6 +33,10 @@ export class InicioComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     console.log(this.mobileQuery.matches);
+
+    this.closedNotification = true;
+    this.openedNotification = false;
+    this.toggledNotification = false;
 
     this.rolSs.getAll()
     .subscribe(listaRoles => {
@@ -46,6 +54,18 @@ export class InicioComponent implements OnInit {
     this.hideActivityList = true;
     this.hideCohortList = true;
     this.hideOther = true;
+  }
+  toggleNotification() {
+    this.openedNotification = !this.openedNotification;
+    this.toggledNotification = true;
+  }
+
+  openNot() {
+    this.openedNotification = true;
+  }
+
+  closeNotification() {
+    this.openedNotification = (!this.toggledNotification);
   }
 
   ngDoCheck() {

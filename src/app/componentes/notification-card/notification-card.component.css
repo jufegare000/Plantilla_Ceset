@@ -1,7 +1,20 @@
 .mat-card {
-    margin-top: 100px;
-    width: 50%;
+    width: 100%;
     cursor: pointer;
+}
+
+.not {
+    width: 0;
+    height: 0;
+    margin-left: 53%;
+    border-top: 0 solid transparent;
+    border-top-width: 5px;
+    border-left: 0 solid transparent; 
+    border-left-width: 5px;
+    border-bottom: 0 solid white;
+    border-bottom-width: 5px;
+    border-right: 0 solid transparent;
+    border-right-width: 5px;
 }
 
 .special {

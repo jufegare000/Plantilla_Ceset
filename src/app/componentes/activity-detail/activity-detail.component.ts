@@ -22,7 +22,7 @@ export class ActivityDetailComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     dependency: new FormControl('', [Validators.required]),
-    resGroup: new FormControl('', [Validators.required]),
+    resGroup: new FormControl(),
     coordinator: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -72,6 +72,10 @@ export class ActivityDetailComponent implements OnInit {
 
   anyError() {
     return false;
+  }
+
+  cancel() {
+    this.router.navigate(['inicio/actividades']);
   }
 
   constructor(private router: Router, private route: ActivatedRoute, private activityService: ActivityService) { }

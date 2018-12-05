@@ -3,6 +3,9 @@ import { MatPaginator, MatSort, MatTableDataSource, MatPaginatorIntl } from '@an
 import { Router } from '@angular/router';
 import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
 import { ActivityService } from '../../servicios/activity.service';
+import { Restangular } from 'ngx-restangular';
+import { createPerson } from '../../modelos/person';
+import { createNewUserer } from '../../modelos/user';
 
 @Component({
   selector: 'app-activity-list',
@@ -12,17 +15,19 @@ import { ActivityService } from '../../servicios/activity.service';
 export class ActivityListComponent implements OnInit {
   displayedColumns = ['id', 'name', 'coordinatorName'];
   dataSource: MatTableDataSource<AcademicActivity>;
+  activities: AcademicActivity[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private activityService: ActivityService) {
+  constructor(private router: Router, private activityService: ActivityService, private restangular: Restangular) {
     // Create 100 users
     const activities: AcademicActivity[] = [];
-    for (let i = 1; i <= 100; i++) { activities.push(createNewActivity(i)); }
+    for (let i = 1; i <= 100; i++) { activities.unshift(createNewActivity(i)); }
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(activities);
+    this.activities = activities;
   }
 
   /**
@@ -47,6 +52,17 @@ export class ActivityListComponent implements OnInit {
 
   createActivity() {
     this.router.navigate(['/inicio/actividades/crear']);
+  }
+
+  clic() {
+    console.log('clicked!');
+    this.activities.unshift(createNewActivity(101));
+    this.dataSource = new MatTableDataSource(this.activities);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.restangular
+      .all('usuarios')
+      .post(createPerson(3));
   }
 
   ngOnInit() {

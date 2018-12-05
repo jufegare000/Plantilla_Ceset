@@ -85,7 +85,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: DialogConfirmComponent
+    component: NotificationCardComponent
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 

@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import { ValidateMatch } from '../../validators/matchValidator';
-import { RolService } from '../../servicios/rol.service';
 import { Rol } from '../../modelos/rol';
 import { ROLES } from '../../modelos/role';
-import { ID_TYPES } from '../../modelos/user';
+import { ID_TYPES, Userer } from '../../modelos/user';
+import { Person } from '../../modelos/person';
+import { PersonService } from '../../servicios/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ import { ID_TYPES } from '../../modelos/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private rolSs: RolService) { }
+  constructor(private personService: PersonService, private router: Router) { }
 
   rol: Rol = new Rol();
 
@@ -92,12 +94,32 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.controls['id'].value);
-    this.rol.id = parseInt(this.form.controls['id'].value, 10);
-    this.rol.estado = 'En aprovacion';
-    this.rol.nombre = this.form.controls['name'].value + ' ' + this.form.controls['lastName'].value;
-
-    this.rolSs.create(this.rol);
+    let form = this.form.controls;
+    let dateParsed = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let person: Person = {
+      email: form['email'].value,
+      completeName: form['name'].value + ' ' + form['lastName'].value,
+      document: form['id'].value,
+      documentType: form['idType'].value,
+      idPerson: 1,
+      userCollection: {
+        idUser: 1,
+        dateCreation: dateParsed,
+        nameUser: form['confirmEmail'].value,
+        password: form['confirmPass'].value,
+        state: ''
+      },
+      idUser: {
+        idUser: 1,
+        dateCreation: dateParsed,
+        nameUser: form['confirmEmail'].value,
+        password: form['confirmPass'].value,
+        state: ''
+      }
+    };
+    
+    this.personService.create(person);
+    this.submited = false;
   }
 
   ngOnInit() {
