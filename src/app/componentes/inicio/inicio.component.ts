@@ -4,6 +4,7 @@ import { Rol } from '../../modelos/rol';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { LoginService } from '../../auth/login.service';
 import { Router } from '@angular/router';
+import { ActivityService } from '../../servicios/activity.service';
 
 @Component({
   selector: 'app-inicio',
@@ -22,7 +23,7 @@ export class InicioComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
 
-  constructor(public loginService: LoginService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private rolSs: RolService, private router: Router) {
+  constructor(public loginService: LoginService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private rolSs: RolService, private router: Router, private activityService: ActivityService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -31,17 +32,14 @@ export class InicioComponent implements OnInit {
 
     this.rolSs.getAll()
     .subscribe(listaRoles => {
-      console.log(listaRoles);
-      this.roles = listaRoles;
+      activityService.roles = listaRoles;
     }, error =>{
-      this.error = error;
+      activityService.error += error;
     });
-
-    this.rolSs.create(new Rol());
   }
 
-  getActivity(event: any) {
-    console.log(event, 'Holiwis');
+  getActivity(event?: any) {
+    console.log(event, 'Holiwis', this.roles, this.activityService.roles);
   }
 
   ngOnInit() {

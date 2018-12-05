@@ -16,3 +16,7 @@
   width: 500px;
   margin: 25px auto;
 }
+
+.buttons > * {
+  width: 49%;
+}

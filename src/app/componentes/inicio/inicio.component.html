@@ -34,8 +34,8 @@
         </mat-sidenav>
         <mat-sidenav-content (click)="toggleDrawer(drawer)" id="content">
             <!-- Body -->
-                <router-outlet (sendActivity)="getActivity($event)"></router-outlet>
-                <app-footer [ngClass]="{ 'footer': !scrollShowed }"></app-footer>
+                <router-outlet></router-outlet>
+                <app-footer (click)="getActivity()" [ngClass]="{ 'footer': !scrollShowed }"></app-footer>
             <!---->
         </mat-sidenav-content>
     </mat-sidenav-container>

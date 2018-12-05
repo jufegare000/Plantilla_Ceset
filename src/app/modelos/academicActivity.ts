@@ -1,5 +1,6 @@
 import { User, createNewUser, NAMES as NOMBRES } from './user';
 import { Contract, createNewContract } from './contract';
+import { ActivityService } from '../servicios/activity.service';
 
 export interface AcademicActivity {
     id: number;

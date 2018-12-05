@@ -50,7 +50,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    console.log('Se cargó la vista de Lista de Actividades', this.activityService.roles);
   }
 }
 

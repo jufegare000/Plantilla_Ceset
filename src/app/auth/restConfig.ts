@@ -25,9 +25,9 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
     RestangularProvider.setDefaultHeaders({ 'Authorization': bearerToken });
 
   }
-  
+
   // Se agrega un interceptor del responso para actualizar el token JWT desppués de la autenticación
-  RestangularProvider.addResponseInterceptor((data, operation, what, url, response) => {
+  /*RestangularProvider.addResponseInterceptor((data, operation, what, url, response) => {
     if (data.token) {
       const tokenJWT = data.token;
       const bearerToken = AUTH_PREFIX + " " + tokenJWT;
@@ -35,13 +35,13 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
     }
     return data;
 
-  });
+  });*/
 
    // This function must return observable
    let refreshAccesstoken = function () {
     return jwtService.generarTokenAutenticacion();
   };
-  
+
   // Se intercepta el error 401 el cual es de autorización y se vuelve a generar el token JWT
   // para repetir el llamado al web service
   // Comunmente este error es generado cuando se vence el token, por lo tanto
@@ -50,10 +50,10 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
     if (response.status === 401) {
       refreshAccesstoken()
       .switchMap(refreshAccesstokenResponse => {
-        
+
         // update Authorization header
         response.request.headers.set('Authorization', 'Bearer ' + refreshAccesstokenResponse)
-        
+
         return response.repeatRequest(response.request);
       })
       .subscribe(
@@ -62,7 +62,7 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
         },
         err => subject.error(err)
       );
-      
+
       return false; // error handled
     }
     return true; // error not handled
