@@ -34,7 +34,6 @@ export class InicioComponent implements OnInit {
 
     console.log(this.mobileQuery.matches);
 
-    this.closedNotification = true;
     this.openedNotification = false;
     this.toggledNotification = false;
 
@@ -55,17 +54,23 @@ export class InicioComponent implements OnInit {
     this.hideCohortList = true;
     this.hideOther = true;
   }
-  toggleNotification() {
-    this.openedNotification = !this.openedNotification;
-    this.toggledNotification = true;
-  }
 
-  openNot() {
-    this.openedNotification = true;
+  toggleNotification() {
+    if(!this.openedNotification) {
+      setTimeout(() => {
+        this.openedNotification = true;
+      }, 2);
+    } else {
+      this.openedNotification = false;
+    }
   }
 
   closeNotification() {
-    this.openedNotification = (!this.toggledNotification);
+    if(this.openedNotification) {
+      setTimeout(() => {
+        this.openedNotification = false;
+      }, 1);
+    }
   }
 
   ngDoCheck() {

@@ -16,6 +16,7 @@
         </button>
         <h1 class="tittle">CESET</h1>
         <button class="notification" (click)="toggleNotification()" mat-icon-button><mat-icon>notifications</mat-icon></button>
+        <button class="logout" mat-raised-button>Cerrar Sesión</button>
     </mat-toolbar>
     <div class="notification-card" *ngIf="openedNotification">
         <app-notification-card></app-notification-card>
@@ -32,6 +33,7 @@
             <mat-toolbar class="toolbar" color="primary">Menu</mat-toolbar>
             <mat-nav-list>
                 <a mat-list-item [ngClass]="{'selected' : this.router.url === '/inicio/actividades'}" [routerLink]="['actividades']" (click)="drawer.toggle()">Lista de Actividades</a>
+                <a mat-list-item [ngClass]="{'selected' : this.router.url === '/inicio/cohortes'}" [routerLink]="['cohortes']" (click)="drawer.toggle()">Lista de Cohortes</a>
                 <a mat-list-item [ngClass]="{'selected' : this.router.url === '/inicio/roles'}" [routerLink]="['roles']" (click)="drawer.toggle()">Roles</a>
             </mat-nav-list>
             <button mat-icon-button style="bottom: 15px; position: absolute; right: 15px;"><mat-icon>settings</mat-icon></button>

@@ -15,8 +15,10 @@
 }
 
 .notification {
-    right: 310px;
+    right: 140px;
+    margin-right: 2%;
     position: absolute;
+    font-weight: bold;
 }
 
 .nav-bar {
@@ -34,7 +36,14 @@
 .notification-card {
     position: absolute;
     top: 50px;
-    right: 100px;
+    right: 50px;
+    margin-right: 2%;
     width: 500px;
     z-index: 100;
+}
+
+.logout {
+    color: black;
+    position: absolute;
+    right: 2%;
 }
