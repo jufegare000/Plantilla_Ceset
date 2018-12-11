@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ActivityService } from '../../servicios/activity.service';
 import { AcademicActivity } from '../../modelos/academicActivity';
+import { DialogThemeComponent } from '../dialog-theme/dialog-theme.component';
 
 @Component({
   selector: 'app-theme-list',
@@ -17,15 +18,14 @@ export class ThemeListComponent implements OnInit {
 
   itemControl = new FormControl('', [Validators.required]);
 
-  displayedColumns = ['name', 'quant', 'value', 'cost'];
+  displayedColumns = ['name', 'quant', 'value'];
   
   sub: any;
   params: any;
 
   showDataForm() {
-    console.log(this.itemControl.value);
-    if(this.itemControl.value this.route.url)
-    this.router.navigate([`inicio/actividades/editar/${this.itemControl.value}/temas`]);
+    if(this.itemControl.value != this.params['code'])
+      this.router.navigate([`inicio/actividades/editar/${this.itemControl.value}/temas`]);
   }
 
   constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private activityService: ActivityService) { }
@@ -38,14 +38,24 @@ export class ThemeListComponent implements OnInit {
     this.itemControl.setValue(this.activity.id);
   }
 
+  openDialog(type: String, row?) {
+    let dialogRef;
+    switch(type) {
+      case 'create':
+        break;
+      case 'edit':
+        dialogRef = this.dialog.open(DialogThemeComponent, {});
+        break;
+      default:
+        break;
+    }
+  }
+
   budgetData: AcademicActivity[] = this.activityService.activities;
 
 
   budgetItemData: BudgetItem[] = [
-    { id: 1, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 2, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 3, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 4, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 }
+    { id: 1, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 }
   ]
 
   budgetItemDataSource = new MatTableDataSource(this.budgetItemData);

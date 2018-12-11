@@ -9,7 +9,7 @@
     </mat-form-field>
   </div>
 
-  <mat-card class="table">
+  <mat-card class="table" *ngIf="exist">
     <mat-table #table [dataSource]="budgetItemDataSource">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
@@ -39,4 +39,5 @@
 
     <button mat-fab color="primary" class="add-button" (click)="openDialog('create')"><mat-icon>add</mat-icon></button>
   </mat-card>
+  <button mat-raised-button color="primary" *ngIf="!exist" class="full" (click)="openDialog('create')">Agregar Gasto</button>
 </mat-card>

@@ -62,6 +62,7 @@ import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-conf
 import { ActivityService } from './servicios/activity.service';
 import { PersonService } from './servicios/person.service';
 import { ThemeListComponent } from './componentes/theme-list/theme-list.component';
+import { DialogThemeComponent } from './componentes/dialog-theme/dialog-theme.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ThemeListComponent } from './componentes/theme-list/theme-list.componen
     DialogDiscountComponent,
     RoleComponent,
     DialogConfirmComponent,
-    ThemeListComponent
+    ThemeListComponent,
+    DialogThemeComponent
   ],
   imports: [
     BrowserModule,
@@ -135,7 +137,8 @@ import { ThemeListComponent } from './componentes/theme-list/theme-list.componen
     DialogBudgetItemComponent,
     DialogFinancialAnalysisComponent,
     DialogDiscountComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    DialogThemeComponent
   ],
 
   bootstrap: [AppComponent],

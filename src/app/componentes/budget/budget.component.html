@@ -18,9 +18,9 @@
     </mat-table>
   </mat-card>
   <br>
-  <p class="label">SUBTOTAL COSTO PROYECTO</p><p class="value">$ {{parseValue(1234567890)}}</p>
-  <p class="label">IMPREVISTOS (3%)</p><p class="value">$ 00000000</p>
-  <p class="label"><b>TOTAL COSTO PROYECTO</b></p><p class="value"><b>$ 000</b></p>
+  <p class="label">SUBTOTAL COSTO PROYECTO</p><p class="value">$ {{parseValue(this.subTotal)}}</p>
+  <p class="label">IMPREVISTOS (3%)</p><p class="value">$ {{parseValue(this.unexpect)}}</p>
+  <p class="label"><b>TOTAL COSTO PROYECTO</b></p><p class="value"><b>$ {{parseValue(this.total)}}</b></p>
   <br>
   <br>
   <br>

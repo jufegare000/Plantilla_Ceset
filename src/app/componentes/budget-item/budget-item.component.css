@@ -38,3 +38,7 @@
   margin: 10px 50px 0 0;
   position: absolute;
 }
+
+.full {
+    width: 100%;
+}

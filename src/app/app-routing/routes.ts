@@ -13,6 +13,7 @@ import { RoleComponent } from '../componentes/role/role.component';
 import { DialogConfirmComponent } from '../componentes/dialog-confirm/dialog-confirm.component';
 import { Component } from '@angular/core';
 import { ThemeListComponent } from '../componentes/theme-list/theme-list.component';
+import { DialogThemeComponent } from '../componentes/dialog-theme/dialog-theme.component';
 
 export const routes: Routes = [
   {
@@ -90,7 +91,7 @@ export const routes: Routes = [
   },
   {
     path: 'dev',
-    component: NotificationCardComponent
+    component: DialogThemeComponent
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 

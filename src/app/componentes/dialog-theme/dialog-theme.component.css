@@ -1,0 +1,22 @@
+.controls-form > * {
+    width: 100%;
+}
+
+.buttons {
+    width: 100%;
+}
+
+.buttons > * {
+    width: 48.5%;
+}
+
+.controls-form {
+  max-width: 500px;
+  padding-right: 10px;
+  overflow-y: scroll;
+  height: 500px;
+}
+
+.hours, .date {
+    width: 32.5% !important;
+}

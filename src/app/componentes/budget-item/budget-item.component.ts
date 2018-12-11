@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { DialogConfirmarComponent } from '../dialog-confirmar/dialog-confirmar.component';
 import { DialogBudgetItemComponent } from '../dialog-budget-item/dialog-budget-item.component';
+import { ActivityService } from '../../servicios/activity.service';
+import { AcademicActivity } from '../../modelos/academicActivity';
 
 @Component({
   selector: 'app-budget-item',
@@ -32,12 +34,7 @@ export class BudgetItemComponent implements OnInit {
     { id: 9, name: 'Otros', value: 0 }
   ];
 
-  budgetItemData: BudgetItem[] = [
-    { id: 1, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 2, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 3, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 },
-    { id: 4, name: 'Holiwis', quantity: 1, value: 5000, realCost: 4500 }
-  ]
+  budgetItemData: BudgetItem[] = [];
 
   budgetItemDataSource = new MatTableDataSource(this.budgetItemData);
 
@@ -82,6 +79,8 @@ export class BudgetItemComponent implements OnInit {
     if(page !== this.params['budgetItem']) this.router.navigate([`inicio/actividades/editar/${this.params['code']}/presupuesto/${page}`]);
   }
 
+  auxId = 0;
+
   openDialog(type: string, row: any) {
     let dialogRef = this.dialog.open(DialogBudgetItemComponent, {
       data: {
@@ -90,9 +89,33 @@ export class BudgetItemComponent implements OnInit {
         row: row
       }
     });
+
+    this.budgetItemData.push({
+      id: 1,
+      name: 'aksjdb',
+      quantity: 546,
+      realCost: 0,
+      value: 54
+    });
+
+    let data;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.budgetItemData.push({
+        id: this.auxId,
+        name: result.data.controls['description'].value,
+        quantity: result.data.controls['quantity'].value,
+        realCost: 0,
+        value: result.data.controls['unityValue'].value
+      });
+
+      this.budgetItemDataSource.data = this.budgetItemData;
+    });
+
+    this.auxId++;
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private activityService: ActivityService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => { this.params = params });
@@ -133,7 +156,25 @@ export class BudgetItemComponent implements OnInit {
         break;
     };
     this.itemControl.setValue(value);
+    this.currentActivity = this.activityService.activities[this.params['code'] - 1];
+
+    if(this.currentActivity.budget.items[value].expenditures) {
+      this.exist = true;
+      for(let i = 0; i < this.currentActivity.budget.items[value].expenditures.length; i++) {
+        let currentExp = this.currentActivity.budget.items[value].expenditures[i]
+        this.budgetItemData[i].id = i;
+        this.budgetItemData[i].name = currentExp.description;
+        this.budgetItemData[i].quantity = currentExp.quantity;
+        this.budgetItemData[i].realCost = currentExp.realCost;
+        this.budgetItemData[i].value = currentExp.total;
+      }
+    } else {
+      this.budgetItemData = [];
+    }
   }
+
+  currentActivity: AcademicActivity;
+  exist = false;
 
 }
 

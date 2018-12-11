@@ -3,6 +3,7 @@ import {MatTableDataSource, MatDialog} from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DialogFinancialAnalysisComponent } from '../dialog-financial-analysis/dialog-financial-analysis.component';
 import { DialogDiscountComponent } from '../dialog-discount/dialog-discount.component';
+import { ActivityService } from '../../servicios/activity.service';
 
 @Component({
   selector: 'app-budget',
@@ -42,16 +43,11 @@ export class BudgetComponent implements OnInit {
   contrUdeaDataSource = new MatTableDataSource(this.udeaContributions);
   contrEngDataSource = new MatTableDataSource(this.engContributions);
 
-  parseValue(value: number) {
-    let strValue: string = value.toString();
-    let endSub: string = strValue.substr(strValue.length - 3, 3);
-    let midSub: string = strValue.substr(strValue.length - 6, 3);
-    let startSub: string = strValue.substr(strValue.length - 9, 3);
-
-    return `${startSub}'${midSub}.${endSub}`;
+  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private activityService: ActivityService) {
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, public dialog: MatDialog) {
+  parseValue(value: number) {
+    return parseValue(value);
   }
 
   goToBudgetItem(id: number) {
@@ -102,8 +98,31 @@ export class BudgetComponent implements OnInit {
     let dialogRef = this.dialog.open(DialogDiscountComponent, {} );
   }
 
+  subTotal: number = 0;
+  unexpect: number = 0;
+  total: number = 0;
+
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => { this.params = params });
+    const budget = this.activityService.activities[this.params['code'] - 1].budget;
+    for(let i = 0; i < budget.items.length; i++){
+      this.budgetData[i].value = budget.items[i].total != null ? budget.items[i].total : 0;
+      this.subTotal += this.budgetData[i].value;
+    }
+
+    this.unexpect = Math.round(this.subTotal * 0.03);
+    this.total = this.subTotal + this.unexpect;
+
+    this.udeaContributions[0].value = Math.round((this.subTotal - this.budgetData[0].value) * 0.1);
+    this.udeaContributions[1].value = Math.round(this.total * 0.06);
+
+    this.engContributions[0].value = Math.round(this.total * 0.14);
+
+    budget.subTotal = this.subTotal;
+    budget.total = this.total;
+    budget.unexpected = this.unexpect;
+    
+    this.activityService.activities[this.params['code'] - 1].budget = budget;
   }
 
 }
@@ -112,4 +131,51 @@ export interface Item {
   id: number;
   name: string;
   value: number;
+}
+
+export function parseValue(value: number): string {
+  const strValue: string = value.toString();
+  const endSub: string = strValue.substr(strValue.length - 3, 3);
+  const midSub: string = strValue.substr(strValue.length - 6, 3);
+  const startMidSub: string = strValue.substr(strValue.length - 9, 3);
+  const startSub: string = strValue.substr(strValue.length - 12, 3);
+
+  if(value < 1000) {
+    return strValue;
+  } else if(value < 10000) {
+    const auxSub: string = strValue.substr(0, 1);
+    return `${auxSub}.${endSub}`;
+  } else if(value < 100000) {
+    const auxSub: string = strValue.substr(0, 2);
+    return `${auxSub}.${endSub}`;
+  } else if(value < 1000000) {
+    return `${midSub}.${endSub}`;
+  } else if(value < 10000000) {
+    const auxSub: string = strValue.substr(0, 1);
+    return `${auxSub}'${midSub}.${endSub}`;
+  } else if(value < 100000000) {
+    const auxSub: string = strValue.substr(0, 2);
+    return `${auxSub}'${midSub}.${endSub}`;
+  } else if(value < 1000000000) {
+    return `${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 10000000000) {
+    const auxSub: string = strValue.substr(0, 1);
+    return `${auxSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 100000000000) {
+    const auxSub: string = strValue.substr(0, 2);
+    return `${auxSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 1000000000000) {
+    return `${startSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 10000000000000) {
+    const auxSub: string = strValue.substr(0, 1);
+    return `${auxSub}''${startSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 100000000000000) {
+    const auxSub: string = strValue.substr(0, 2);
+    return `${auxSub}''${startSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else if(value < 1000000000000000) {
+    const auxSub: string = strValue.substr(0, 3);
+    return `${auxSub}''${startSub}.${startMidSub}'${midSub}.${endSub}`;
+  } else {
+    return strValue;
+  }
 }

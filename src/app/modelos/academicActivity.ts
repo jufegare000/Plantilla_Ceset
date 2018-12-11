@@ -1,6 +1,9 @@
 import { User, createNewUser, NAMES as NOMBRES } from './user';
 import { Contract, createNewContract } from './contract';
 import { ActivityService } from '../servicios/activity.service';
+import { Role, ROLES } from './role';
+import { Budget, createNewBudget } from './budget';
+import { Theme } from './theme';
 
 export interface AcademicActivity {
     id: number;
@@ -16,6 +19,9 @@ export interface AcademicActivity {
     contract?: Contract;
     creationDate: Date;
     state: string;
+    roles?: Role[];
+    budget?: Budget;
+    themes?: Theme[];
 }
 
 export function createNewActivity(id: number, name?: string): AcademicActivity {
@@ -30,6 +36,8 @@ export function createNewActivity(id: number, name?: string): AcademicActivity {
     const contract = Math.round(Math.random() * (2 - 1)) == 0 ? createNewContract() : null;
     const creationDate = new Date();
     const state = 'Activo';
+    const role = ROLES[Math.round(Math.random() * (ROLES.length - 1))];
+    const budget = createNewBudget(id);
 
   return {
     id: id,
@@ -43,7 +51,9 @@ export function createNewActivity(id: number, name?: string): AcademicActivity {
     duration: duration,
     contract: contract,
     creationDate: creationDate,
-    state: state
+    state: state,
+    roles: [role],
+    budget: budget
   };
 }
 
