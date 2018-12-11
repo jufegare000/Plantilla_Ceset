@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AcademicActivity } from '../../modelos/academicActivity';
+import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
 import { ActivityService } from '../../servicios/activity.service';
 
 @Component({
@@ -78,6 +78,10 @@ export class ActivityDetailComponent implements OnInit {
     this.router.navigate(['inicio/actividades']);
   }
 
+  createActivity() {
+    this.router.navigate['inicio/cohortes/crear'];
+  }
+
   constructor(private router: Router, private route: ActivatedRoute, private activityService: ActivityService) { }
 
   ngOnInit() {
@@ -87,7 +91,10 @@ export class ActivityDetailComponent implements OnInit {
 
     this.createView = this.router.url.includes('crear');
 
-    if(!this.createView && activity != null) {
+    if(!activity)
+      activity = this.activityService.activities[parseInt(this.params['code']) - 1];
+
+    if(!this.createView) {
       let form: FormGroup = this.generalForm;
       form.controls['name'].setValue(activity.name);
       form.controls['type'].setValue(activity.type);

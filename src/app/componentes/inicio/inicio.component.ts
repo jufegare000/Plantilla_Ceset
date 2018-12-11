@@ -5,6 +5,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { LoginService } from '../../auth/login.service';
 import { Router } from '@angular/router';
 import { ActivityService } from '../../servicios/activity.service';
+import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
 
 @Component({
   selector: 'app-inicio',
@@ -32,7 +33,13 @@ export class InicioComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    console.log(this.mobileQuery.matches);
+    // Create 100 users
+    const activities: AcademicActivity[] = [];
+    for (let i = 1; i <= 100; i++) { activities.push(createNewActivity(i)); }
+
+    console.log(activities[99].id, activities[98].id, activities[97].id);
+
+    activityService.activities = activities;
 
     this.openedNotification = false;
     this.toggledNotification = false;

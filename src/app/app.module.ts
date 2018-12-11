@@ -61,6 +61,7 @@ import { RoleComponent } from './componentes/role/role.component';
 import { DialogConfirmComponent } from './componentes/dialog-confirm/dialog-confirm.component';
 import { ActivityService } from './servicios/activity.service';
 import { PersonService } from './servicios/person.service';
+import { ThemeListComponent } from './componentes/theme-list/theme-list.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PersonService } from './servicios/person.service';
     DialogFinancialAnalysisComponent,
     DialogDiscountComponent,
     RoleComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    ThemeListComponent
   ],
   imports: [
     BrowserModule,

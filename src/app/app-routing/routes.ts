@@ -12,6 +12,7 @@ import { BudgetItemComponent } from '../componentes/budget-item/budget-item.comp
 import { RoleComponent } from '../componentes/role/role.component';
 import { DialogConfirmComponent } from '../componentes/dialog-confirm/dialog-confirm.component';
 import { Component } from '@angular/core';
+import { ThemeListComponent } from '../componentes/theme-list/theme-list.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
     {
       path: 'actividades/editar/:code',
       component: ActivityDetailComponent
+    },
+    {
+      path: 'actividades/editar/:code/temas',
+      component: ThemeListComponent
     },
     {
       path: 'actividades/editar/:code/presupuesto',

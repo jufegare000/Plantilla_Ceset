@@ -21,9 +21,10 @@ export class ActivityListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private router: Router, private activityService: ActivityService, private restangular: Restangular) {
-    // Create 100 users
     const activities: AcademicActivity[] = [];
-    for (let i = 1; i <= 100; i++) { activities.unshift(createNewActivity(i)); }
+    for(let i = 0 ; i < activityService.activities.length; i++) {
+      activities.unshift(activityService.activities[i]);
+    }
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(activities);
@@ -52,17 +53,6 @@ export class ActivityListComponent implements OnInit {
 
   createActivity() {
     this.router.navigate(['/inicio/actividades/crear']);
-  }
-
-  clic() {
-    console.log('clicked!');
-    this.activities.unshift(createNewActivity(101));
-    this.dataSource = new MatTableDataSource(this.activities);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.restangular
-      .all('usuarios')
-      .post(createPerson(3));
   }
 
   ngOnInit() {

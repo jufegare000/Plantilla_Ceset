@@ -32,7 +32,7 @@
       <mat-error *ngIf="generalForm.controls['coordinator'].hasError('required')">{{getNameErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="number" formControlName="phone" placeholder="Teléfono de Contacto" required>
+      <input matInput type="number" min="0" formControlName="phone" placeholder="Teléfono de Contacto" required>
       <mat-error *ngIf="generalForm.controls['phone'].hasError('required')">{{getNameErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -40,7 +40,7 @@
       <mat-error *ngIf="generalForm.controls['email'].hasError('required') || generalForm.controls['email'].hasError('email')">{{getNameErr()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="number" formControlName="duration" placeholder="Duracion en Meses" required>
+      <input matInput type="number" min="0" formControlName="duration" placeholder="Duracion en Meses" required>
       <mat-error *ngIf="generalForm.controls['duration'].hasError('required')">{{getNameErr()}}</mat-error>
     </mat-form-field>
     <br><br>
@@ -79,6 +79,7 @@
           <mat-datepicker #endDate></mat-datepicker>
           <mat-error *ngIf="contractForm.controls['endDate'].hasError('required')">{{getNameErr()}}</mat-error>
         </mat-form-field>
+        <button mat-raised-button color="primary">Guardar</button>
       </form>
     </mat-expansion-panel>
 
@@ -162,7 +163,7 @@
 
   <div class="buttons" *ngIf="this.createView">
     <button class="button" mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
-    <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Crear</button>
+    <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" (click)="createActivity()" [disabled]="">Crear</button>
   </div>
   <div class="buttons" *ngIf="!this.createView">
     <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="warn" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Eliminar</button>
