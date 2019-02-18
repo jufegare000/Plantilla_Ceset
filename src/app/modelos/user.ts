@@ -17,6 +17,7 @@ export interface Userer {
   password: string;
   dateCreation: string;
   state: string;
+  idPerson: Person
 }
 
 export function createNewUserer(id: number) {

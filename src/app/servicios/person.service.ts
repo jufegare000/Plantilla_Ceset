@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 import { Observable } from 'rxjs/Observable';
 import { Person } from '../modelos/person';
+import { User } from '../modelos/user';
 
 @Injectable()
 export class PersonService {
@@ -16,9 +17,9 @@ export class PersonService {
     return this.restangular.one('person', id).get();
   }
 
-  create(person: Person) {
+  create(person) {
     this.restangular
-    .all('usuarios')
+    .all('persona')
     .post(person);
   }
 

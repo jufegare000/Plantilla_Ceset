@@ -95,8 +95,8 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     let form = this.form.controls;
-    let dateParsed = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    let person: Person = {
+    let dateParsed : string = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let person = {
       email: form['email'].value,
       completeName: form['name'].value + ' ' + form['lastName'].value,
       document: form['id'].value,
@@ -117,8 +117,30 @@ export class RegisterComponent implements OnInit {
         state: ''
       }
     };
+
+    let user = {
+      idUser: 2,
+      nameUser: form['confirmEmail'].value,
+      password: form['confirmPass'].value,
+      dateCreation: dateParsed,
+      state: '',
+      idPerson: {
+        email: form['email'].value,
+        completeName: form['name'].value + ' ' + form['lastName'].value,
+        document: form['id'].value,
+        documentType: form['idType'].value,
+        idPerson: 1,
+        userCollection: {
+          idUser: 2,
+          nameUser: form['confirmEmail'].value,
+          password: form['confirmPass'].value,
+          dateCreation: dateParsed,
+          state: ''
+        }
+      }
+    }
     
-    this.personService.create(person);
+    this.personService.create(user);
     this.submited = false;
   }
 
