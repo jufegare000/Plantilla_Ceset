@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { UserService } from '../../servicios/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   captchaResolved: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   hide: boolean = true;
   blur: boolean = false;
@@ -51,7 +52,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/inicio']);
+    let form = this.form.controls;
+    let user = form['email'].value;
+    let userpass = form['pass'].value;
+    this.userService.getAuth(user, userpass);
+    //this.router.navigate(['/inicio']);
   }
 
   ngOnInit() {

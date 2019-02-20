@@ -48,6 +48,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { RolService }from './servicios/rol.service';
+import { UserService }from './servicios/user.service';
 import { NotificationCardComponent } from './componentes/notification-card/notification-card.component';
 import { ActivityListComponent, MatPaginatorIntlSpanish } from './componentes/activity-list/activity-list.component';
 import { ActivityDetailComponent } from './componentes/activity-detail/activity-detail.component';
@@ -128,6 +129,7 @@ import { DialogThemeComponent } from './componentes/dialog-theme/dialog-theme.co
     RolService,
     ActivityService,
     PersonService,
+    UserService,
     {
       provide: MatPaginatorIntl,
       useClass: MatPaginatorIntlSpanish
