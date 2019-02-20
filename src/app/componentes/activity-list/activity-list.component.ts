@@ -40,6 +40,15 @@ export class ActivityListComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  startInput(input) {
+    const date = new Date(input.value);
+    console.log(input.value, date);
+  }
+
+  finishInput(input) {
+    console.log(input.value);
+  }
+
   clicked(row: AcademicActivity) {
     this.activityService.activity = row;
     this.router.navigate(['/inicio/actividades/editar/' + row.id]);

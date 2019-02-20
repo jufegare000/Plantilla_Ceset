@@ -5,12 +5,12 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <mat-form-field class="date">
-      <input matInput (click)="start.open()" [matDatepicker]="start" placeholder="Fecha Creación (Desde)">
+      <input matInput #startInpu (dateInput)="startInput(startInpu)" (click)="start.open()" [matDatepicker]="start" placeholder="Fecha Creación (Desde)">
       <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
       <mat-datepicker #start></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="date">
-      <input matInput (click)="finish.open()" [matDatepicker]="finish" placeholder="Fecha Creación (Hasta)">
+      <input matInput #finishInpu (dateInput)="finishInput(finishInpu)" (click)="finish.open()" [matDatepicker]="finish" placeholder="Fecha Creación (Hasta)">
       <mat-datepicker-toggle matSuffix [for]="finish"></mat-datepicker-toggle>
       <mat-datepicker #finish></mat-datepicker>
     </mat-form-field>
