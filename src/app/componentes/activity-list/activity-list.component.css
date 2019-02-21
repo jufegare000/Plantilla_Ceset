@@ -1,4 +1,4 @@
-.search > *:not(.date) {
+.search > form > *:not(.date) {
   width: 100%;
 }
 
@@ -8,8 +8,8 @@
 }
 
 .date {
-  width: 50%;
-  margin: -0.3%;
+  width: 48%;
+  margin: 0.5%;
   padding: 0;
 }
 
@@ -51,4 +51,8 @@
 .item:hover {
     background: #F5F5F5;
     cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
 }

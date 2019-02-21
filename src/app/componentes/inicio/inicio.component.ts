@@ -35,9 +35,10 @@ export class InicioComponent implements OnInit {
 
     // Create 100 users
     const activities: AcademicActivity[] = [];
-    for (let i = 1; i <= 100; i++) { activities.push(createNewActivity(i)); }
-
-    console.log(activities[99].id, activities[98].id, activities[97].id);
+    for (let i = 1; i <= 100; i++) {
+      const activity = createNewActivity(i);
+      activities.push(activity);
+    }
 
     activityService.activities = activities;
 

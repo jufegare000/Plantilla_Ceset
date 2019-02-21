@@ -1,19 +1,26 @@
 <mat-card class="container">
   <div class="search">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-    <mat-form-field class="date">
-      <input matInput #startInpu (dateInput)="startInput(startInpu)" (click)="start.open()" [matDatepicker]="start" placeholder="Fecha Creación (Desde)">
-      <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-      <mat-datepicker #start></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field class="date">
-      <input matInput #finishInpu (dateInput)="finishInput(finishInpu)" (click)="finish.open()" [matDatepicker]="finish" placeholder="Fecha Creación (Hasta)">
-      <mat-datepicker-toggle matSuffix [for]="finish"></mat-datepicker-toggle>
-      <mat-datepicker #finish></mat-datepicker>
-    </mat-form-field>
+    <form [formGroup]="this.form">
+      <input type="hidden" formControlName="$key">
+      <mat-form-field>
+        <input matInput formControlName="search" (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+        <mat-icon *ngIf="!this.searched" matSuffix class="pointer">search</mat-icon>
+        <mat-icon *ngIf="this.searched" (click)="clearData(this.form.controls['search'])" matSuffix class="pointer">clear</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="date">
+        <input matInput #startInpu formControlName="start" (dateInput)="startInput(startInpu)" (click)="start.open()" [matDatepicker]="start" placeholder="Fecha Creación (Desde)" (keyup)="finishInput(finishInpu)">
+        <mat-error *ngIf="this.tryStartErr">{{getStartErr()}}</mat-error>
+        <mat-datepicker-toggle *ngIf="!this.startDate" matSuffix [for]="start"></mat-datepicker-toggle>
+        <mat-icon *ngIf="this.startDate" (click)="clearData(this.form.controls['start'])" matSuffix class="pointer">clear</mat-icon>
+        <mat-datepicker #start></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="date">
+        <input matInput #finishInpu formControlName="finish" (dateInput)="finishInput(finishInpu)" (click)="finish.open()" [matDatepicker]="finish" placeholder="Fecha Creación (Hasta)" (keyup)="finishInput(finishInpu)">
+        <mat-datepicker-toggle *ngIf="!this.finishDate" matSuffix [for]="finish"></mat-datepicker-toggle>
+        <mat-icon *ngIf="this.finishDate" (click)="clearData(this.form.controls['finish'])" matSuffix class="pointer">clear</mat-icon>
+        <mat-datepicker #finish></mat-datepicker>
+      </mat-form-field>
+    </form>
   </div>
 
   <mat-card class="table">

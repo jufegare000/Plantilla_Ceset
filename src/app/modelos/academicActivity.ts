@@ -34,7 +34,7 @@ export function createNewActivity(id: number, name?: string): AcademicActivity {
     const coordinatorPhone = Math.round(Math.random() * (10000000 - 1));
     const duration = Math.round(Math.random() * (13 - 1));
     const contract = Math.round(Math.random() * (2 - 1)) == 0 ? createNewContract() : null;
-    const creationDate = new Date();
+    const creationDate = new Date(2019 , Math.round(Math.random()), Math.round(Math.random() * 21));
     const state = 'Activo';
     const role = ROLES[Math.round(Math.random() * (ROLES.length - 1))];
     const budget = createNewBudget(id);
