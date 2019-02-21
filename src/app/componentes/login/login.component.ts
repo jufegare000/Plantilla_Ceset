@@ -12,7 +12,7 @@ import { UserService } from '../../servicios/user.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
+    $key: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     pass: new FormControl('', [Validators.required])
   });
@@ -52,10 +52,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let form = this.form.controls;
-    let user = form['email'].value;
-    let userpass = form['pass'].value;
-    this.userService.getAuth(user, userpass);
+    const form = this.form.controls;
+
+    const user = {
+      usuario: form['email'].value,
+      clave: form['pass'].value
+    }
+    console.log(user);
+    this.userService.getAuth(user);
     //this.router.navigate(['/inicio']);
   }
 
