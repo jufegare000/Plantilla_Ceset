@@ -35,9 +35,18 @@ export class InicioComponent implements OnInit {
 
     // Create 100 users
     const activities: AcademicActivity[] = [];
+    let lastActivity: AcademicActivity = null;
     for (let i = 1; i <= 100; i++) {
       const activity = createNewActivity(i);
-      activities.push(activity);
+      if(lastActivity) {
+        console.log("Ultima: " + lastActivity.id + " - " + lastActivity.creationDate.getDay() + "/" + lastActivity.creationDate.getMonth() + "/" +lastActivity.creationDate.getFullYear() + "\n" + "Actual: " + activity.id + " - " + activity.creationDate.getDay() + "/" + activity.creationDate.getMonth() + "/" +activity.creationDate.getFullYear() + "\nEs Mayor la ultima? = " + "\n========================== \n");
+      }
+      lastActivity = activity;
+      
+    }
+
+    for(let i = 0; i < activities.length; i++) {
+      console.log(activities[i].id + 1 + " - " + activities[i].creationDate.getDay() + "/" + activities[i].creationDate.getMonth() + "/" + activities[i].creationDate.getFullYear());
     }
 
     activityService.activities = activities;

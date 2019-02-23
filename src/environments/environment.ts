@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   claveDeCifrado : [],
   vectorDeInicializacion : [],
-  TOKEN_KEY : 'secret'
+  TOKEN_KEY : 'Ct-ubaspufabspudbpef2323b%·%234'
 };

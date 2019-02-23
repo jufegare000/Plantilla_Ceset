@@ -14,6 +14,7 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
   if (!tokenJWT) {
     jwtService.generarTokenAutenticacion()
     .subscribe( token => {
+      console.log("1. SE CREA TOKEN AUTH " + token);
       tokenJWT = token;
       let bearerToken = AUTH_PREFIX + " " + tokenJWT;
       // set static header
@@ -27,7 +28,7 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
   }
 
   // Se agrega un interceptor del responso para actualizar el token JWT desppués de la autenticación
-  /*RestangularProvider.addResponseInterceptor((data, operation, what, url, response) => {
+  RestangularProvider.addResponseInterceptor((data, operation, what, url, response) => {
     if (data.token) {
       const tokenJWT = data.token;
       const bearerToken = AUTH_PREFIX + " " + tokenJWT;
@@ -35,7 +36,7 @@ export function RestangularConfigFactory(RestangularProvider, jwtService) {
     }
     return data;
 
-  });*/
+  });
 
    // This function must return observable
    let refreshAccesstoken = function () {

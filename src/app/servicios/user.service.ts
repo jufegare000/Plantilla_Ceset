@@ -8,7 +8,7 @@ export class UserService {
 
   constructor(private restangular: Restangular) {   }
 
-  getAuth(name): Observable<User> {
+  getAuth(name): Observable<any> {
     return this.restangular
       .one('usuarios/autenticar')
       .get(name);

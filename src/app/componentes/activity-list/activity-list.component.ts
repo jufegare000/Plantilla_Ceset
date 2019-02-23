@@ -73,9 +73,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    if(filterValue) {
-      this.searched = true;
-    }
+    filterValue ? this.searched = true : this.searched = false;
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);

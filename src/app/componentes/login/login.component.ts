@@ -59,7 +59,13 @@ export class LoginComponent implements OnInit {
       clave: form['pass'].value
     }
     console.log(user);
-    this.userService.getAuth(user);
+    this.userService.getAuth(user)
+    .subscribe(resultado => {
+      // Llaman método guardarDatosUsuario de login.service
+
+    }, error => {
+      // si hay algún error haga algo
+    });
     //this.router.navigate(['/inicio']);
   }
 
