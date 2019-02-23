@@ -33,33 +33,29 @@ export class InicioComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    // Create 100 users
+    // Crea 100 usuarios con datos dummies
     const activities: AcademicActivity[] = [];
-    let lastActivity: AcademicActivity = null;
     for (let i = 1; i <= 100; i++) {
-      const activity = createNewActivity(i);
-      if(lastActivity) {
-        console.log("Ultima: " + lastActivity.id + " - " + lastActivity.creationDate.getDay() + "/" + lastActivity.creationDate.getMonth() + "/" +lastActivity.creationDate.getFullYear() + "\n" + "Actual: " + activity.id + " - " + activity.creationDate.getDay() + "/" + activity.creationDate.getMonth() + "/" +activity.creationDate.getFullYear() + "\nEs Mayor la ultima? = " + "\n========================== \n");
-      }
-      lastActivity = activity;
-      
+      activities.push(createNewActivity(i));
     }
 
-    for(let i = 0; i < activities.length; i++) {
-      console.log(activities[i].id + 1 + " - " + activities[i].creationDate.getDay() + "/" + activities[i].creationDate.getMonth() + "/" + activities[i].creationDate.getFullYear());
-    }
+    //Ordena los datos por fecha
+    activities.sort((a, b) => {
+      return a.creationDate > b.creationDate ? -1 : a.creationDate == b.creationDate ? 0 : 1;
+    });
 
+    //Iguala el servicio de actividades a las actividades dummies para que estén disponibles en toda la aplicación
     activityService.activities = activities;
 
     this.openedNotification = false;
     this.toggledNotification = false;
 
-    this.rolSs.getAll()
+    /*this.rolSs.getAll()
     .subscribe(listaRoles => {
       activityService.roles = listaRoles;
     }, error =>{
       activityService.error += error;
-    });
+    });*/
   }
 
   getActivity(event?: any) {
@@ -100,6 +96,7 @@ export class InicioComponent implements OnInit {
 
   array = [,,,,,,,,,,,,,,,,,,,,,,];
 
+  //Muestra el componente al cual se accede por el menú de navegación
   show(component: number): void {
     switch(component) {
       case 0:

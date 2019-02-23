@@ -74,6 +74,8 @@ export class ActivityListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     filterValue ? this.searched = true : this.searched = false;
+
+    // Resetea la fecha de hoy para ser comparable con las demas fechas de datos dummies
     const today = new Date();
     today.setHours(0);
     today.setMinutes(0);
@@ -88,9 +90,9 @@ export class ActivityListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.activities);
     } else {
       for(let i = 0 ; i < this.activities.length; i++) {
-        if((this.activities[i].creationDate > this.startDate && this.activities[i].creationDate < this.finishDate) ||
-          (this.activities[i].creationDate > this.startDate && !this.finishDate) ||
-          (this.activities[i].creationDate < this.finishDate && !this.startDate)) {
+        if((this.activities[i].creationDate >= this.startDate && this.activities[i].creationDate <= this.finishDate) ||
+          (this.activities[i].creationDate >= this.startDate && !this.finishDate) ||
+          (this.activities[i].creationDate <= this.finishDate && !this.startDate)) {
           auxiliarActivities.push(this.activities[i]);
         }
       }
@@ -104,6 +106,7 @@ export class ActivityListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
+  //Función para descartar los datos de busqueda
   clearData(input: FormControl) {
     input.setValue('');
     this.searched = false;
@@ -120,7 +123,7 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Se cargó la vista de Lista de Actividades', this.activityService.roles);
+    //console.log('Se cargó la vista de Lista de Actividades', this.activityService.roles);
   }
 
   getStartErr() {
@@ -141,6 +144,10 @@ export class MatPaginatorIntlSpanish extends MatPaginatorIntl {
     previousPageLabel = 'Página Anterior';
 
     getRangeLabel = (page: number, pageSize: number, length: number) => {
-        return ((page * pageSize) + 1) + ' - ' + ((page * pageSize) + pageSize) + ' de ' + length;
+      const from = (page * pageSize) + 1;
+      const to = ((page * pageSize) + pageSize) >= length ? length : ((page * pageSize) + pageSize);
+      const equalMsg = (length + ' de ' + length);
+      const result = from == length ? equalMsg : from == to ? equalMsg : (from + ' - ' + to + ' de ' + length);
+      return result;
     }
 }
