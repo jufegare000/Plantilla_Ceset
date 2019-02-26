@@ -147,7 +147,7 @@ export class MatPaginatorIntlSpanish extends MatPaginatorIntl {
       const from = (page * pageSize) + 1;
       const to = ((page * pageSize) + pageSize) >= length ? length : ((page * pageSize) + pageSize);
       const equalMsg = (length + ' de ' + length);
-      const result = from == length ? equalMsg : from == to ? equalMsg : (from + ' - ' + to + ' de ' + length);
+      const result = from == length || from == to || length == 0 ? equalMsg : (from + ' - ' + to + ' de ' + length);
       return result;
     }
 }

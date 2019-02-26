@@ -73,5 +73,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getRole().subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    })
   }
 }

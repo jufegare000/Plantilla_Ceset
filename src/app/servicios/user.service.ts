@@ -13,4 +13,8 @@ export class UserService {
       .one('usuarios/autenticar')
       .get(name);
   }
+
+  getRole(): Observable<any> {
+    return this.restangular.one('rol').get();
+  }
 }
