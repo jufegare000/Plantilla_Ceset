@@ -6,6 +6,7 @@ import { routes } from './routes';
 import { CanDeactivateGuard }       from '../auth/can-deactive-guard.service';
 import { SelectivePreloadingStrategy } from '../servicios/selective-preload-strategy.service';
 import { AuthGuard } from '../auth/auth-guard.service';
+import { mixinColor } from '@angular/material';
 
 
 @NgModule({

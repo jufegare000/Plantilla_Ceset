@@ -32,10 +32,12 @@ export const routes: Routes = [
   {
    path: 'inicio',
    component: InicioComponent,
+
    children: [
      {
        path: 'actividades',
-       component: ActivityListComponent
+       component: ActivityListComponent,
+       canLoad: [AuthGuard] // Ubicar en las rutas necesarias
      },
      {
       path: 'actividades/crear',

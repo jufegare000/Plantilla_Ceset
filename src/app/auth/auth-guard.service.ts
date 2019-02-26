@@ -36,27 +36,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           queryParamsHandling: 'preserve',
           preserveFragment: true
         };
-        let redirect = '';
-        const rol = +this.loginService.obtenerIdRolAutenticado();
-        // Según el rol se hace una redirección
-        switch (rol) {
-          case 1:
-            redirect = this.loginService.redirectUrl ? this.loginService.redirectUrl : '/administrador';
-            break;
-          case 2:
 
-            break;
-          case 3:
-
-            break;
-          case 4:
- 
-            break;
-          case 5:
-            
-            break;
-        }
-        this.router.navigate([redirect], navigationExtrasProf);
         return false;
       }
       return true;

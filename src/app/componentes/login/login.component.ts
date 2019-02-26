@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { UserService } from '../../servicios/user.service';
+import { LoginService } from '../../auth/login.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   captchaResolved: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private loginService : LoginService) { }
 
   hide: boolean = true;
   blur: boolean = false;
@@ -61,9 +62,10 @@ export class LoginComponent implements OnInit {
 
     const strUser = JSON.stringify(user);
     console.log(user);
-    this.userService.getAuth(strUser)
+    this.userService.getAuth(user)
     .subscribe(resultado => {
       // Llaman método guardarDatosUsuario de login.service
+this.loginService.guardarDatosUsuario(resultado.token);
       console.log(resultado);
     }, error => {
       console.log(error);
@@ -73,10 +75,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getRole().subscribe(res => {
+    /*this.userService.getRole().subscribe(res => {
       console.log(res);
     }, err => {
       console.log(err);
-    })
+    })*/
   }
 }

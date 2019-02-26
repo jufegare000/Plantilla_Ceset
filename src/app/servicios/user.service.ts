@@ -14,7 +14,7 @@ export class UserService {
       .get(name);
   }
 
-  getRole(): Observable<any> {
+  /*getRole(): Observable<any> {
     return this.restangular.one('rol').get();
-  }
+  }*/
 }
