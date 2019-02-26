@@ -42,7 +42,7 @@ export class LoginService {
     this.rol.emit(idRol);
   }
 
-
+  //
   autenticar(usuario: string, clave: string, rol: number): Observable<any> {
     return this.restangular.one('usuarios/autenticar').get({ usuario: usuario, clave: clave, rol: rol });
 

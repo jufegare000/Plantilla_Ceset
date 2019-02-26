@@ -22,6 +22,7 @@
         <app-notification-card></app-notification-card>
     </div>
 <!---->
+        
 <!--SideNav-->
     <mat-sidenav-container (click)="closeNotification()" fullscreen class="container">
         <mat-sidenav
@@ -41,6 +42,9 @@
         <mat-sidenav-content (click)="toggleDrawer(drawer)" id="content">
             <!-- Body -->
                 <router-outlet></router-outlet>
+
+                <input type="file" (change)="onFileChange($event)" multiple="false" />
+                <input type="submit">
                 <app-footer (click)="getActivity()" [ngClass]="{ 'footer': !scrollShowed }"></app-footer>
             <!---->
         </mat-sidenav-content>

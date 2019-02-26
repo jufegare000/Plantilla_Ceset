@@ -58,12 +58,15 @@ export class LoginComponent implements OnInit {
       usuario: form['email'].value,
       clave: form['pass'].value
     }
+
+    const strUser = JSON.stringify(user);
     console.log(user);
-    this.userService.getAuth(user)
+    this.userService.getAuth(strUser)
     .subscribe(resultado => {
       // Llaman método guardarDatosUsuario de login.service
-
+      console.log(resultado);
     }, error => {
+      console.log(error);
       // si hay algún error haga algo
     });
     //this.router.navigate(['/inicio']);
