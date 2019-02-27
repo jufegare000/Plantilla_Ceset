@@ -161,6 +161,17 @@
 
   <br><br>
 
+  <button class="button import-button" mat-raised-button color="primary" (click)="fileInput.click()">
+    Importar
+    <input
+      #fileInput
+      type="file"
+      (change)="onFileChange($event)"
+      multiple="false"
+      accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    />
+  </button>
+
   <div class="buttons" *ngIf="this.createView">
     <button class="button" mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
     <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" (click)="createActivity()" [disabled]="">Crear</button>

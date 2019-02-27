@@ -58,7 +58,7 @@ export class ActivityDetailComponent implements OnInit {
   });
 
   types = ['Consultoría Profesional', 'Servicio Técnico de Laboratorio', 'Educación no Formal', 'Gestión Tecnológica'];
-
+  
   getNameErr() {
     return '';
   }
