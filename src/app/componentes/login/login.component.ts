@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { UserService } from '../../servicios/user.service';
@@ -12,10 +12,12 @@ import { LoginService } from '../../auth/login.service';
 })
 export class LoginComponent implements OnInit {
 
+  public teta = false;
+
   form: FormGroup = new FormGroup({
     $key: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
-    pass: new FormControl('', [Validators.required])
+    pass: new FormControl('', [Validators.required, this.responseValidator(this)])
   });
 
   captchaResolved: boolean = false;
@@ -37,11 +39,16 @@ export class LoginComponent implements OnInit {
   }
 
   getEmailErr(): string {
-    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : this.form.controls['confirmEmail'].hasError('match') ? 'Los Correos Electronicos no concuerdan' : '';
+    return this.form.controls['email'].hasError('required') ? 'Digita tu Correo Electrónico' : this.form.controls['email'].hasError('email') ? 'Digita correctamente tu Correo Electronico' : '';
   }
 
   getPassErr(): string {
-    return this.form.controls['pass'].hasError('required') ? 'Digita tu Contraseña' : '';
+    return this.form.controls['pass'].hasError('credentials') ? this.credentialError ? this.credentialError.message : '' : this.form.controls['pass'].hasError('required') ? 'Digita tu Contraseña' : '';
+  }
+
+  resetCredential() {
+    this.credentialError = null;
+    this.form.controls['pass'].setValue(this.form.controls['pass'].value);
   }
 
   buttonInfo() {
@@ -65,14 +72,25 @@ export class LoginComponent implements OnInit {
     this.userService.getAuth(user)
     .subscribe(resultado => {
       // Llaman método guardarDatosUsuario de login.service
-      console.log(resultado);
-      this.loginService.guardarDatosUsuario(resultado.token);
-      console.log(resultado);
+      resultado.status == 403 ? console.log(403) : console.log(200);
+      //this.loginService.guardarDatosUsuario(resultado.token);
     }, error => {
-      console.log(error);
       // si hay algún error haga algo
+      this.credentialError = {status: error.status, message: 'Email y/o contraseña no concuerdan'}
+      this.form.controls['pass'].setValue('');
     });
     //this.router.navigate(['/inicio']);
+  }
+
+  credentialError: {status: number, message: string} | null = null;
+
+  responseValidator(params: any) : ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      console.log(params.credentialError);
+      if(params.credentialError)
+        return { 'credentials': true };
+      return null
+    }
   }
 
   ngOnInit() {

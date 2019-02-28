@@ -11,9 +11,9 @@
           <mat-error *ngIf="this.form.controls['email'].hasError('required') || this.form.controls['email'].hasError('email')">{{getEmailErr()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="pass" (blur)="blur = true" placeholder="Contraseña" [type]="hide ? 'password' : 'text'" required>
+          <input matInput formControlName="pass" (blur)="blur = true" (keyup)="resetCredential()" placeholder="Contraseña" [type]="hide ? 'password' : 'text'" required>
           <mat-icon matSuffix class="pointer" [color]="iconColor()" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="this.form.controls['pass'].hasError('required')">{{getPassErr()}}</mat-error>
+          <mat-error *ngIf="this.form.controls['pass'].hasError('required') || this.form.controls['pass'].hasError('credentials')">{{getPassErr()}}</mat-error>
         </mat-form-field>
         <div class="recaptcha">
           <re-captcha (resolved)="resolved()" siteKey="6LefZHUUAAAAABw7Rp-hlMrkPZIuhvQOBOIyEuza" required></re-captcha>
