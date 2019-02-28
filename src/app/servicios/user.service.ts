@@ -9,9 +9,10 @@ export class UserService {
   constructor(private restangular: Restangular) {   }
 
   getAuth(name): Observable<any> {
+    console.log(name.password);
     return this.restangular
-      .one('usuarios/autenticar')
-      .get(name);
+      .all('usuarios/autenticar')
+      .post(name);
   }
 
   /*getRole(): Observable<any> {

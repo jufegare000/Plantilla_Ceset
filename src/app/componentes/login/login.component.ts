@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
     const form = this.form.controls;
 
     const user = {
-      usuario: form['email'].value,
-      clave: form['pass'].value
+      nameUser: form['email'].value,
+      password: form['pass'].value
     }
 
     const strUser = JSON.stringify(user);
@@ -65,7 +65,8 @@ export class LoginComponent implements OnInit {
     this.userService.getAuth(user)
     .subscribe(resultado => {
       // Llaman método guardarDatosUsuario de login.service
-this.loginService.guardarDatosUsuario(resultado.token);
+      console.log(resultado);
+      this.loginService.guardarDatosUsuario(resultado.token);
       console.log(resultado);
     }, error => {
       console.log(error);
