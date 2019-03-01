@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     .subscribe(resultado => {
       // Llaman método guardarDatosUsuario de login.service
       resultado.status == 403 ? console.log(403) : console.log(200);
-      //this.loginService.guardarDatosUsuario(resultado.token);
+      this.loginService.guardarDatosUsuario(resultado.token);
     }, error => {
       // si hay algún error haga algo
       this.credentialError = {status: error.status, message: 'Email y/o contraseña no concuerdan'}

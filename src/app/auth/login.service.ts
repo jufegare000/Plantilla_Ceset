@@ -38,6 +38,9 @@ export class LoginService {
     return this.rol;
   }
   actualizarRol(idRol: number) {
+    //Hacer validación en caso de que el usuario no cuente con roles.
+
+
     localStorage.setItem(ROL_USUARIO, idRol.toString());
     this.rol.emit(idRol);
   }
@@ -52,9 +55,12 @@ export class LoginService {
    * Función para almacenar los datos del usuario en localStorage
    * @param token Token JWT
    */
-  guardarDatosUsuario(tokenString: string) {
+    guardarDatosUsuario(tokenString: string) {
     let token = this.jwtService.decodeToken(tokenString);
-    
+    let us = token.usr;
+    let parseao = JSON.parse(us);
+    //En el objeto anterior se encuentran los resultados de la consulta, deben mapearse correctamente.
+
     localStorage.setItem(NOMBRE_USUARIO, token.usr);
     localStorage.setItem(NOMBRE_COMPLETO_USUARIO, token.nom);
     localStorage.setItem(IDENTIFICACION_USUARIO, token.ide);
@@ -92,7 +98,7 @@ export class LoginService {
   esSesionIniciada(): boolean {
     let tokenJWT = this.obtenerTokenJWT();
     if (tokenJWT) {
-      if(this.jwtService.esTokenValido(tokenJWT)){ 
+      if(this.jwtService.esTokenValido(tokenJWT)){
         return true
       }else{
         return false;
