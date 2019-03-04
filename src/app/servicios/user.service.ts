@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 import { Observable } from 'rxjs/Observable';
-import { User } from '../modelos/user';
+import { User, AuthUser } from '../modelos/user';
 
 @Injectable()
 export class UserService {
 
-  constructor(private restangular: Restangular) {   }
+  constructor(private restangular: Restangular) { }
 
-  getAuth(name): Observable<any> {
-    console.log(name.password);
+  getAuth(user: AuthUser): Observable<any> {
     return this.restangular
       .all('usuarios/autenticar')
-      .post(name);
+      .post(user);
   }
 
   /*getRole(): Observable<any> {

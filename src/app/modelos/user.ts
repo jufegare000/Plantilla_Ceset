@@ -1,6 +1,11 @@
 import { ROLES, Role, RoleRequest } from './role';
 import { Person, createPerson } from './person';
 
+export interface AuthUser {
+  nameUser: string;
+  password: string;
+}
+
 export interface User {
     name: string;
     lastName: string;

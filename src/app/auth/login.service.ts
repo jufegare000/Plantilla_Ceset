@@ -41,8 +41,8 @@ export class LoginService {
     //Hacer validación en caso de que el usuario no cuente con roles.
 
 
-    localStorage.setItem(ROL_USUARIO, idRol.toString());
-    this.rol.emit(idRol);
+    //localStorage.setItem(ROL_USUARIO, idRol.toString());
+    //this.rol.emit(idRol);
   }
 
   //

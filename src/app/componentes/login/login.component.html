@@ -7,19 +7,55 @@
       <div class="controls-form">
         <input type="hidden" formControlName="$key">
         <mat-form-field hideRequiredMarker>
-          <input matInput formControlName="email" placeholder="Email" required>
-          <mat-error *ngIf="this.form.controls['email'].hasError('required') || this.form.controls['email'].hasError('email')">{{getEmailErr()}}</mat-error>
+          <input
+            matInput
+            formControlName="email"
+            (keyup)="resetCredential()"
+            placeholder="Email"
+            required />
+          <mat-error *ngIf="this.form.controls['email'].hasError('required') || this.form.controls['email'].hasError('email')">
+            {{getEmailErr()}}
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput formControlName="pass" (blur)="blur = true" (keyup)="resetCredential()" placeholder="Contraseña" [type]="hide ? 'password' : 'text'" required>
-          <mat-icon matSuffix class="pointer" [color]="iconColor()" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="this.form.controls['pass'].hasError('required') || this.form.controls['pass'].hasError('credentials')">{{getPassErr()}}</mat-error>
+          <input
+            matInput
+            formControlName="pass"
+            (blur)="blur = true"
+            (keyup)="resetCredential()"
+            placeholder="Contraseña"
+            [type]="hide ? 'password' : 'text'"
+            required />
+          <mat-icon
+            matSuffix
+            class="pointer"
+            [color]="iconColor()"
+            (click)="hide = !hide">
+            {{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="this.form.controls['pass'].hasError('required') || this.form.controls['pass'].hasError('credentials')">
+            {{getPassErr()}}
+          </mat-error>
         </mat-form-field>
         <div class="recaptcha">
           <re-captcha (resolved)="resolved()" siteKey="6LefZHUUAAAAABw7Rp-hlMrkPZIuhvQOBOIyEuza" required></re-captcha>
         </div>
-        <button type="submit" mat-raised-button class="button" color="primary" [title]="buttonInfo()" >Entrar</button>
-        <button type="button" class="button" mat-raised-button (click)="goToRegister()">Registrarse</button>
+        <button
+          type="submit"
+          mat-raised-button
+          class="button"
+          color="primary"
+          [title]="buttonInfo()"
+          [disabled]="this.form.invalid || !this.captchaResolved">
+            Entrar
+        </button>
+        <button
+          type="button"
+          class="button"
+          mat-raised-button
+          (click)="goToRegister()">
+            Registrarse
+        </button>
       </div>
     </form>
   </mat-card>
