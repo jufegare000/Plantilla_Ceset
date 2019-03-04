@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 import { Observable } from 'rxjs/Observable';
-import { User, AuthUser } from '../modelos/user';
+import { User, AuthUser, Userer } from '../modelos/user';
 
 @Injectable()
 export class UserService {

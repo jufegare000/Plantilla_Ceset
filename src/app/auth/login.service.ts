@@ -16,6 +16,8 @@ import { JwtService } from '../servicios/jwt.service';
 import { Token } from '../modelos/token';
 
 import {TOKEN_NAME, NOMBRE_USUARIO, ID_USUARIO, NOMBRE_COMPLETO_USUARIO, IDENTIFICACION_USUARIO, ROL_USUARIO } from '../comun/constantes';
+import { RolService } from '../servicios/rol.service';
+import { Role } from '../modelos/role';
 
 @Injectable()
 export class LoginService {
@@ -31,18 +33,16 @@ export class LoginService {
   constructor(
     private restangular: Restangular,
     public router: Router,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private rolService: RolService
   ) { }
 
   obtenerRol(): any {
     return this.rol;
   }
-  actualizarRol(idRol: number) {
+  actualizarRol(roles: Role[]) {
     //Hacer validación en caso de que el usuario no cuente con roles.
-
-
-    //localStorage.setItem(ROL_USUARIO, idRol.toString());
-    //this.rol.emit(idRol);
+    this.rolService.sessionRoles = roles;
   }
 
   //
@@ -65,7 +65,8 @@ export class LoginService {
     localStorage.setItem(NOMBRE_COMPLETO_USUARIO, token.nom);
     localStorage.setItem(IDENTIFICACION_USUARIO, token.ide);
     localStorage.setItem(ID_USUARIO, token.sub);
-    this.actualizarRol(token.rol);
+    console.log(parseao);
+    this.actualizarRol(parseao.rolebyuserCollection);
     this.setTokenJWT(tokenString);
 
   }
@@ -109,7 +110,7 @@ export class LoginService {
   }
 
   cerrarSesion(): void {
-    this.actualizarRol(0);
+    //sthis.actualizarRol(0);
     localStorage.clear();
     const navigationExtrasProf: NavigationExtras = {
       queryParamsHandling: 'preserve',

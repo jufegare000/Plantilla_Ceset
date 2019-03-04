@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 import { Observable } from 'rxjs/Observable';
 import { Rol } from '../modelos/rol';
+import { Role } from '../modelos/role';
 
 @Injectable()
 export class RolService {
 
   constructor(private restangular: Restangular) { }
+
+  sessionRoles: Role[];
 
   getAll(): Observable<Rol[]>{
     return this.restangular.all('rol').getList();
@@ -20,5 +23,11 @@ export class RolService {
     this.restangular
     .all('rol')
     .post(rol);
+  }
+
+  getPermissions(roles: any): Observable<any> {
+    return this.restangular
+      .all('rol/permisos')
+      .post(roles);
   }
 }

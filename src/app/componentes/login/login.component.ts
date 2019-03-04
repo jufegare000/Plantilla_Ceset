@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../servicios/user.service';
 import { LoginService } from '../../auth/login.service';
 import { AuthUser } from '../../modelos/user';
+import { RolService } from '../../servicios/rol.service';
 
 @Component({
   selector: 'app-login',
