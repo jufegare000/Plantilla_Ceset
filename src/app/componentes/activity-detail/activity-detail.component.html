@@ -181,4 +181,5 @@
     <button class="button" mat-raised-button [title]="anyError() ? 'Diligencia correctamente todos los campos' : ''" color="primary" type="submit" (click)="submited = true; submit()" [disabled]="anyError() || submited">Guardar</button>
   </div>
 
+  <button (click)="console()">Console</button>
 </mat-card>

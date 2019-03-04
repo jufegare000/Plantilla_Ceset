@@ -65,7 +65,7 @@ export class LoginService {
     localStorage.setItem(NOMBRE_COMPLETO_USUARIO, token.nom);
     localStorage.setItem(IDENTIFICACION_USUARIO, token.ide);
     localStorage.setItem(ID_USUARIO, token.sub);
-    console.log(parseao);
+    console.log(parseao.rolebyuserCollection);
     this.actualizarRol(parseao.rolebyuserCollection);
     this.setTokenJWT(tokenString);
 

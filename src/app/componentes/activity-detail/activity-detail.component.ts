@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
 import { ActivityService } from '../../servicios/activity.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-activity-detail',
@@ -105,6 +106,37 @@ export class ActivityDetailComponent implements OnInit {
       form.controls['email'].setValue(activity.coordinatorEmail);
       form.controls['duration'].setValue(activity.duration);
     }
+  }
+
+  data: any[] = [];
+
+  onFileChange(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    //if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const data = [];
+
+    for(let i = 0; i < target.files.length; i++) {
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        /* read workbook */
+        const bstr: string = e.target.result;
+        const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+        /* grab first sheet */
+        const wsname: string = wb.SheetNames[0];
+        const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+        /* save data */
+        data.push(XLSX.utils.sheet_to_json(ws, {header: 1}));
+      };
+      reader.readAsBinaryString(target.files[i]);
+    }
+    this.data = data;
+  }
+
+  console() {
+    console.log(this.data);
   }
 
 }
