@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AcademicActivity, createNewActivity } from '../../modelos/academicActivity';
 import { ActivityService } from '../../servicios/activity.service';
@@ -111,9 +111,9 @@ export class ActivityDetailComponent implements OnInit {
   data: any[] = [];
 
   onFileChange(evt: any) {
+    this.data = [];
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(evt.target);
-    //if (target.files.length !== 1) throw new Error('Cannot use multiple files');
     const data = [];
 
     for(let i = 0; i < target.files.length; i++) {
@@ -129,10 +129,71 @@ export class ActivityDetailComponent implements OnInit {
 
         /* save data */
         data.push(XLSX.utils.sheet_to_json(ws, {header: 1}));
+        this.setFormData(data, i);
+        this.data = data;
       };
       reader.readAsBinaryString(target.files[i]);
     }
-    this.data = data;
+  }
+
+  setFormData(data: Array<Array<Array<any>>>, i: number) {
+    if(data[i][0][1]) {
+      if(data[i][0][1].toString() == TEACHER_INFO_FORMAT) {
+        console.log(data[i][0][1]);
+        return;
+      } else if(data[i][0][1] == START_FORMAT) {
+        this.setStartFormat(data[i]);
+        return;
+      }
+    }
+
+    if(data[i][0][3]) {
+      if(data[i][0][3].toString() == BUDGET_FORMAT) {
+        console.log(data[i][0][3]);
+        return;
+      }
+    }
+
+    if(data[i][0][6]) {
+      if(data[i][0][6].toString() == TIMELINE_FORMAT) {
+        console.log(data[i][0][6]);
+        return;
+      }
+    }
+
+    console.log('No se reconoce el formato que quieres importar :(');
+  }
+
+  setStartFormat(data: Array<Array<any>>) {
+    const controls: { [key: string]: AbstractControl } = this.generalForm.controls;
+    const name = data[12][1] ? data[12][1].toString() : '';
+    const type = this.getTypeOfActivity(data);
+    const dependency = data[17][1] ? data[17][1].toString() : '';
+    const resGroup = data[18][1] ? data[18][1].toString() : '';
+    const coordinator = data[19][1] ? data[19][1].toString() : '';
+    const phone = data[20][1] ? this.parseNumber(data[20][1].toString()) : '';
+    const email = data[20][7] ? data[20][7].toString() : '';
+    const duration = data[24][0] ? this.parseNumber(data[24][0].toString()) : '';
+    controls['name'].setValue(name);
+    controls['type'].setValue(type);
+    controls['dependency'].setValue(dependency);
+    controls['resGroup'].setValue(resGroup);
+    controls['coordinator'].setValue(coordinator);
+    controls['phone'].setValue(phone);
+    controls['email'].setValue(email);
+    controls['duration'].setValue(duration);
+  }
+
+  getTypeOfActivity(data: Array<Array<any>>): string {
+      return  data[14][1] ? this.types[0]:
+              data[14][5] ? this.types[1]:
+              data[15][1] ? this.types[2]:
+              data[15][5] ? this.types[3] : '';
+  }
+
+  parseNumber(number: string): number {
+    const regExp = /\d+/g;
+    return parseInt(number.match(regExp).join(''));
   }
 
   console() {
@@ -140,3 +201,12 @@ export class ActivityDetailComponent implements OnInit {
   }
 
 }
+
+export function dateFromXlToJs(xlDate: number): Date {
+  return new Date((xlDate - (25567 + 1))*86400*1000);
+}
+
+export const TEACHER_INFO_FORMAT = "Solicitud de información Docentes";
+export const BUDGET_FORMAT = "PRESUPUESTO EDUCACIÓN CONTINUA ";
+export const START_FORMAT = "ACTA DE INICIO ";
+export const TIMELINE_FORMAT = "CRONOGRAMA DE SERVICIOS EDUCACIÓN CONTINUA";
