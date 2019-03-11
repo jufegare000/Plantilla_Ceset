@@ -25,9 +25,13 @@ export class RolService {
     .post(rol);
   }
 
-  getPermissions(roles: any): Observable<any> {
+  getPermissions(roles): Observable<any> {
+    let numbers = [];
+    for(let i = 0; i < roles.length; i++) {
+      numbers[i] = roles[i].idRole;
+    }
     return this.restangular
       .all('rol/permisos')
-      .post(roles);
+      .post(numbers);
   }
 }

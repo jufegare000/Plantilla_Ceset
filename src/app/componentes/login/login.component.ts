@@ -49,15 +49,15 @@ export class LoginComponent implements OnInit {
 
   //Mensaje sí el campo email del form tiene algun error
   getEmailErr(): string {
-    const control: AbstractControl = this.form.controls['email']; 
+    const control: AbstractControl = this.form.controls['email'];
     const msg = control.hasError('required') ? 'Digita tu Correo Electrónico' :
-                control.hasError('email') ? 'Digita correctamente tu Correo Electronico' : ''; 
+                control.hasError('email') ? 'Digita correctamente tu Correo Electronico' : '';
     return msg;
   }
 
   //Mensaje sí el campo pass del fomr tiene algun error
   getPassErr(): string {
-    const control: AbstractControl = this.form.controls['pass']; 
+    const control: AbstractControl = this.form.controls['pass'];
     const msg = control.hasError('credentials') ?
                 this.credentialError ? this.credentialError.message : '' :
                 control.hasError('required') ? 'Digita tu Contraseña' : '';
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
       nameUser: form['email'].value,
       password: form['pass'].value
     }
-    
+
     this.userService.getAuth(user)
     .subscribe(res => {
       if(res.status != 403) {
